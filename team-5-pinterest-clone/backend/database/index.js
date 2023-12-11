@@ -7,3 +7,4 @@ connection.connect(() => {
   console.log("Database connection established");
 });
 
+module.exports = connection;
