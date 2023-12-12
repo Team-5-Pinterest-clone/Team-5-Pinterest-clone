@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
+import "../register/register.css";
 
 const Register = () => {
   const [inputs, setInputs] = useState({
@@ -26,6 +28,7 @@ const Register = () => {
       setErr(err.response.data);
     }
   };
+  const onChange = () => {};
 
   return (
     <div className="register-container">
@@ -46,7 +49,6 @@ const Register = () => {
         onChange={handleChange}
         className="register-input"
       />
-
       <label htmlFor="password-input">Your Password:</label>
       <input
         type="password"
@@ -55,12 +57,19 @@ const Register = () => {
         onChange={handleChange}
         className="register-input"
       />
-      {err && <p className="register-error">{err}</p>}
+      <div className="remember-me">
+        <input type="checkbox" id="rememberMe" />
+        <label htmlFor="rememberMe">Remember Me</label>
+      </div>
+      <ReCAPTCHA
+        sitekey="6LdBVi8pAAAAAGTk834uzz-txgGjcKaCixBKyIMJ"
+        onChange={onChange}
+      />
+      ,{err && <p className="register-error">{err}</p>}
       <button onClick={handleClick} className="register-button">
         Register
       </button>
     </div>
   );
 };
-
 export default Register;
