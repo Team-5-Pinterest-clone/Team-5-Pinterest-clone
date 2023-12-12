@@ -1,18 +1,27 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Register from "../src/register/Register.jsx";
-import Login from "./login/Login.jsx";
 
+import './App.css'
+import ReactDOM from "react-dom/client";
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Nav from './Components/Nav.jsx'
+import Home from './Components/Home.jsx'
+import AllPosts from './Components/AllPosts.jsx';
+import Dummy from './data/dummy.js'
+ import Register from "./register/Register.jsx";
+ import Login from "./login/Login.jsx";
 function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
+  const [data,setData]=useState(Dummy)
+  return( 
+  <BrowserRouter>
+    <div><Nav/></div>
+    <Routes>
+          <Route index element={<Home />} />
+          <Route path="all-posts" element={<AllPosts data={data}/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
-}
+      </Routes>
+    </BrowserRouter>
+    )}
 
 export default App;
+
