@@ -134,15 +134,15 @@
 
 import React from "react";
 
-function OnePost() {
+function OnePost(props) {
   return (
     <div className="d-flex flex-column justify-content-center align-items-center vh-100">
-      <div>OnePost</div>
+
 
       <div className="d-flex flex-row justify-content-center align-self-center">
         <figure className="figure">
           <img
-            src="https://i.pinimg.com/originals/20/a8/f2/20a8f25a0e7a3b1b11813e5c27c64382.jpg"
+            src={props.one.photo}
             className="figure-img img-fluid rounded"
             width="400"
             height="600"
