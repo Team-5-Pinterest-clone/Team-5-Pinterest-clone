@@ -11,7 +11,7 @@ const getAllusers = (req, res) => {
     if (err) {
       console.error(err);
     } else {
-      res.send(result);
+      res.json(result);
       console.log(result);
     }
   });
