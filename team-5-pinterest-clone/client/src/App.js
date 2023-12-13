@@ -11,7 +11,7 @@ import Login from "./login/Login.jsx";
 import CreatePost from "./Components/CreatePost.jsx";
 import OnePost from "./Components/OnePost.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import "bootstrap-icons/font/bootstrap-icons.css";
 function App() {
   const [data, setData] = useState(Dummy);
   return (
