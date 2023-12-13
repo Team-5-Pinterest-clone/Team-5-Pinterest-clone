@@ -8,6 +8,7 @@ function CreatePost() {
   const [productstock, setproductstock] = useState(0);
   const [category, setcategory] = useState("");
   const [productsImage, setproductsImage] = useState("");
+  const [image, setImage] = useState(null);
 
   axios
     .post("http://localhost:3000/api/dashboard/createProduct", {
@@ -27,11 +28,21 @@ function CreatePost() {
       console.log(err);
     });
 
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0];
+  //   setproductsImage(file);
+  // };
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    setproductsImage(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
-
   return (
     <div className="d-flex flex-column justify-content-center align-items-center vh-100">
       <div>CreatePost</div>
@@ -48,14 +59,29 @@ function CreatePost() {
                 <p>Choose a file or drag and drop it here</p>
               </label>
               <input
+                onChange={handleImageChange}
                 className="form-control form-control-lg"
                 id="formFileLg"
                 type="file"
               />
+
+              {/* <div>
+                <input type="file" onChange={handleImageChange} />
+                {image && <img src={image} alt="Uploaded" />}
+              </div> */}
               <p>
                 we recommend using high quality .jpg files
                 <br></br> less than 20MB or .mp4 files less than 200MB.
               </p>
+              <div>
+                {image && (
+                  <img
+                    src={image}
+                    alt="Uploaded"
+                    style={{ width: "200px", height: "200px" }}
+                  />
+                )}
+              </div>
             </div>
           </figure>
         </div>
