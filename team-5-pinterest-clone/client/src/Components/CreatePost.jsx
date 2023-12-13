@@ -8,6 +8,8 @@ function CreatePost() {
   const [productstock, setproductstock] = useState(0);
   const [category, setcategory] = useState("");
   const [productsImage, setproductsImage] = useState("");
+  const [file, setFile] = useState(null);
+  const [url, setUrl] = useState("");
 
   axios
     .post("http://localhost:3000/api/dashboard/createProduct", {
@@ -32,6 +34,18 @@ function CreatePost() {
     setproductsImage(file);
   };
 
+  const uploadImage = async () => {
+    const form = new FormData();
+    form.append("file", file);
+    form.append("upload_preset", "amineguezmir");
+
+    await axios
+      .post("https://api.cloudinary.com/v1_1/dj6zjioi8/upload", form)
+      .then((result) => {
+        setUrl(result.data.secure_url);
+      });
+  };
+
   return (
     <div className="d-flex flex-column justify-content-center align-items-center vh-100">
       <div>CreatePost</div>
@@ -51,6 +65,8 @@ function CreatePost() {
                 className="form-control form-control-lg"
                 id="formFileLg"
                 type="file"
+                value={file}
+                onChange={(e) => setFile(e.target.files[0])}
               />
               <p>
                 we recommend using high quality .jpg files
