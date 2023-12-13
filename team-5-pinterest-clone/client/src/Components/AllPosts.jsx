@@ -7,11 +7,11 @@ function AllPosts(props) {
   const [details, setDetails] = useState(false);
   const handleDetails = (obj) => {
     setDetails((prevDetails) => !prevDetails);
-    props.setOnep(obj);
+    props.set(obj);
   };
   return (
     <div>
-      {details && <OnePost/>}
+      {details && <OnePost  one={props.one}/>}
     <div className="allposts">
       {props.data.map((el, i) => (
         <Post data={el} users={users} handle={handleDetails}/>

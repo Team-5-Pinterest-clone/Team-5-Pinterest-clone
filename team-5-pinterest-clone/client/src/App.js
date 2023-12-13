@@ -35,11 +35,11 @@ function App() {
       </div>
       <Routes>
         <Route index element={<Home />} />
-        <Route path="all-posts" element={<AllPosts data={data} set={setOnep}/>} />
+        <Route path="all-posts" element={<AllPosts data={data} set={setOnep} one={oneP}/>} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/createPost" element={<CreatePost />} />
-        <Route path="/OnePost" element={<OnePost one={oneP}/>} />
+        <Route path="/OnePost" element={<OnePost/>} />
       </Routes>
     </BrowserRouter>
   );
