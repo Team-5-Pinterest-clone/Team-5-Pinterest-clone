@@ -1,6 +1,6 @@
 module.exports = {
   host: "localhost",
   user: "salim",
-  password: "salim123",
+  password: "rivenlol00",
   database: "pinterestclone",
 };
