@@ -9,7 +9,7 @@ import Dummy from "./data/dummy.js";
 import Register from "./register/Register.jsx";
 import Login from "./login/Login.jsx";
 import CreatePost from "./Components/CreatePost.jsx";
-import Post from "./Components/Post.jsx";
+import Post from "./Components/OnePost.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
