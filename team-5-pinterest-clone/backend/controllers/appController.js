@@ -61,6 +61,12 @@ const getOneUser = (req, res) => {
     res.send(result);
   });
 };
+const getOneUserById = (req, res) => {
+  const sql = `SELECT * FROM users WHERE idUsers=${req.params.id}`;
+  db.query(sql, (err, result) => {
+    res.send(result);
+  });
+};
 
 const getOnePost = (req, res) => {
   const sql = `SELECT * FROM postes WHERE idUsers=${req.params.idUsers}`;
@@ -467,6 +473,7 @@ module.exports = {
   getAllPosts,
   getAllComments,
   getOneUser,
+  getOneUserById ,
   getOnePost,
   getOneComment,
   getOneSavedByIdUsers,
