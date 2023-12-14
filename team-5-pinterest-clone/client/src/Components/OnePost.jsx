@@ -25,13 +25,13 @@ function OnePost(props) {
               <a className="media-left" href="#">
                 <span className="d-flex">
                   <img
-                    src="https://th.bing.com/th/id/OIP.BVbNgsb0pic_Ju-OKXrU3QAAAA?w=270&h=270&rs=1&pid=ImgDetMain"
+                    src={props.user.photo}
                     alt="User Avatar"
                     className="img-circle"
                     width="30px"
                     height="30px"
                   />{" "}
-                  <h4 className="media-heading user_name">Baltej Singh</h4>
+                  <h4 className="media-heading user_name">{props.user.username}</h4>
                 </span>
               </a>
             </div>
@@ -49,15 +49,15 @@ function OnePost(props) {
               className="btn-close"
               data-bs-dismiss="toast"
               aria-label="Close"
+              onClick={()=>props.set(false)}
             ></button>
           </div>
           <div className="card-body">
             <h5>Title</h5>
-            <small>11 mins ago</small>
+            <small>{props.one.createdAt}</small>
             <h5>Description</h5>
             <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem
-              omnis reprehenderit
+              {props.one.description}
             </p>{" "}
             <h5>Comments</h5>
           </div>

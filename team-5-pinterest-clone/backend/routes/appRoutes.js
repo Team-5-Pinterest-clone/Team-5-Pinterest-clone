@@ -15,6 +15,7 @@ router.get("/getAllComments", appController.getAllComments);
 router.get("/getUser/:id", appController.getUser);
 
 // Get one routes
+router.get("/getOneUserid/:id", appController.getOneUserById);
 router.get("/getOneUser/:username", appController.getOneUser);
 router.get("/getOnePost/:id", appController.getOnePost);
 router.get("/getOneComment/:id", appController.getOneComment);
