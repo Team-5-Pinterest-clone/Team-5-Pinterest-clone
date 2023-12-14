@@ -1,15 +1,16 @@
-// when user logs out
-import React from "react";
-import { emphasize, styled } from "@mui/material/styles";
-import Breadcrumbs from "@mui/material/Breadcrumbs";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Chip from "@mui/material/Chip";
+// when user logs out = landingPage = for All visitors
+
+import React from 'react';
+import { emphasize, styled } from '@mui/material/styles';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Chip from '@mui/material/Chip';
 
 const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   const backgroundColor =
-    theme.palette.mode === "light"
+    theme.palette.mode === 'light'
       ? theme.palette.grey[200]
       : theme.palette.grey[900];
   return {
@@ -17,10 +18,10 @@ const StyledBreadcrumb = styled(Chip)(({ theme }) => {
     height: theme.spacing(3),
     color: theme.palette.text.primary,
     fontWeight: theme.typography.fontWeightRegular,
-    "&:hover, &:focus": {
+    '&:hover, &:focus': {
       backgroundColor: emphasize(backgroundColor, 0.06),
     },
-    "&:active": {
+    '&:active': {
       boxShadow: theme.shadows[1],
       backgroundColor: emphasize(backgroundColor, 0.12),
     },
@@ -29,26 +30,29 @@ const StyledBreadcrumb = styled(Chip)(({ theme }) => {
 
 function handleClick(event) {
   event.preventDefault();
-  console.info("You clicked a breadcrumb.");
+  console.info('You clicked a breadcrumb.');
 }
 
 export default function CustomizedNavbar() {
   return (
-    <AppBar
-      position="static"
-      sx={{ backgroundColor: "rgba(251, 251, 251, 1)" }}
-    >
+    <AppBar position="static" sx={{ backgroundColor: 'rgba(251, 251, 251, 1)' }}>
       <Toolbar>
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{ flexGrow: 1, color: "black" }}
-        >
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: 'black' }}>
           Pintastic
         </Typography>
         <Typography
           variant="body1"
-          sx={{ marginRight: "20px", color: "black" }}
+          sx={{
+            marginRight: '20px',
+            color: 'black',
+            borderRadius: '8px', // Adjust border-radius for rounded edges
+            padding: '8px 12px', // Adjust padding for softer look
+            transition: 'background-color 0.3s, color 0.3s', // Smooth transition
+            '&:hover': {
+              backgroundColor: 'black',
+              color: 'white',
+            },
+          }}
         >
           About Us
         </Typography>
