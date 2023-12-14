@@ -59,7 +59,7 @@ function CreatePost() {
   };
   console.log(title);
   return (
-    <div className="d-flex flex-column justify-content-center align-items-center vh-100">
+    <div className="d-flex flex-column justify-content-center align-items-center vh-100 card">
       <div>CreatePost</div>
       <div className="d-flex flex-row justify-content-center align-self-center">
         <div
@@ -69,7 +69,7 @@ function CreatePost() {
           aria-atomic="true"
         >
           <figure className="figure">
-            <div>
+            <div className="card-body">
               <label htmlFor="formFileLg" className="form-label">
                 <p>Choose a file or drag and drop it here</p>
                 <div>
@@ -121,7 +121,7 @@ function CreatePost() {
           aria-live="assertive"
           aria-atomic="true"
         >
-          <form className="fixdirection mb-3" onSubmit={handleSubmit}>
+          <form className="fixdirection mb-3 card-body" onSubmit={handleSubmit}>
             <label className="form-label">
               <p>Title</p>
               <input

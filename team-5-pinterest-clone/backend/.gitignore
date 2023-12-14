@@ -3,7 +3,7 @@
 # Logs
 logs
 *.log
-
+config.js
 # Runtime data
 pids
 *.pid
