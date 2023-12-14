@@ -2,9 +2,15 @@ import React from "react";
 
 function OnePost(props) {
   return (
-    <div className="d-flex flex-column justify-content-center align-items-center vh-100 card ">
-      <div className="d-flex flex-row justify-content-center align-self-center card-body posts">
-        <figure className="figure ">
+    <div
+      className="d-flex flex-column justify-content-center align-items-center vh-100 card "
+      style={{ maxHeight: "700px" }}
+    >
+      <div className="d-flex flex-row justify-content-center align-self-center card-body posts ">
+        <figure
+          className="figure "
+          style={{ maxWidth: "400px", maxHeight: "600px" }}
+        >
           <img
             src={props.one.photo}
             className="figure-img img-fluid rounded posts"
