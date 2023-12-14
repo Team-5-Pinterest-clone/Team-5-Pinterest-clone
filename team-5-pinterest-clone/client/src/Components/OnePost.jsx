@@ -27,118 +27,11 @@
 //       </div>
 //     </div>
 // //   );
-// function OnePost() {
-//   return (
-//     <div className="d-flex flex-column justify-content-center align-items-center vh-100">
-//       <div>OnePost</div>
-
-//       <div className="d-flex flex-row justify-content-center align-self-center">
-//         <figure className="figure">
-//           <img
-//             src="https://i.pinimg.com/originals/20/a8/f2/20a8f25a0e7a3b1b11813e5c27c64382.jpg"
-//             className="figure-img img-fluid rounded"
-//             width="400"
-//             height="600"
-//             alt=""
-//           />
-//         </figure>
-
-//         <div
-//           className="toast fade show"
-//           role="alert"
-//           aria-live="assertive"
-//           aria-atomic="true"
-//         >
-//           <div className="toast-header">
-//             <strong className="me-auto">Comments</strong>
-//             <small>11 mins ago</small>
-//             <button
-//               type="button"
-//               className="btn-close"
-//               data-bs-dismiss="toast"
-//               aria-label="Close"
-//             ></button>
-//           </div>
-//           <div className="toast-body">
-//             No comments yet! Add one to start the conversation. pls add hier
-//             this code
-//             <div>
-//               <figure className="figure">
-//                 <img
-//                   src="https://i.pinimg.com/originals/20/a8/f2/20a8f25a0e7a3b1b11813e5c27c64382.jpg"
-//                   className="figure-img img-fluid rounded"
-//                   width="50"
-//                   height="50"
-//                   alt=""
-//                 />
-//               </figure>
-
-//               <span>comment exampel</span>
-//             </div>
-//             <div>
-//               <figure className="figure">
-//                 <img
-//                   src="https://i.pinimg.com/originals/20/a8/f2/20a8f25a0e7a3b1b11813e5c27c64382.jpg"
-//                   className="figure-img img-fluid rounded"
-//                   width="50"
-//                   height="50"
-//                   alt=""
-//                 />
-//               </figure>
-
-//               <span>comment exampel</span>
-//             </div>
-//             <div>
-//               <figure className="figure">
-//                 <img
-//                   src="https://i.pinimg.com/originals/20/a8/f2/20a8f25a0e7a3b1b11813e5c27c64382.jpg"
-//                   className="figure-img img-fluid rounded"
-//                   width="50"
-//                   height="50"
-//                   alt=""
-//                 />
-//               </figure>
-
-//               <span>comment exampel</span>
-//             </div>
-//           </div>
-//           <div className="mb-3">
-//             <p> 8 Comments</p>
-//             <figure className="figure">
-//               <img
-//                 src="https://i.pinimg.com/originals/20/a8/f2/20a8f25a0e7a3b1b11813e5c27c64382.jpg"
-//                 className="figure-img img-fluid rounded"
-//                 width="50"
-//                 height="50"
-//                 alt=""
-//               />
-//             </figure>
-//             <label htmlFor="exampleFormControlTextarea1" className="form-label">
-//               <textarea
-//                 className="form-control"
-//                 id="formGroupExampleInput"
-//                 placeholder="Add a comment"
-//                 type="text"
-//                 name="Title"
-//                 requiredTitle
-//               />
-//             </label>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default OnePost;
-
 import React from "react";
 
 function OnePost(props) {
   return (
     <div className="d-flex flex-column justify-content-center align-items-center vh-100">
-
-
       <div className="d-flex flex-row justify-content-center align-self-center">
         <figure className="figure">
           <img
@@ -157,8 +50,30 @@ function OnePost(props) {
           aria-atomic="true"
         >
           <div className="toast-header">
-            <strong className="me-auto">Comments</strong>
-            <small>11 mins ago</small>
+            <div className="media">
+              <a className="media-left" href="#">
+                <p>
+                  <img
+                    src="https://th.bing.com/th/id/OIP.BVbNgsb0pic_Ju-OKXrU3QAAAA?w=270&h=270&rs=1&pid=ImgDetMain"
+                    alt="User Avatar"
+                    className="img-circle"
+                    width="30px"
+                    height="30px"
+                  />{" "}
+                  <h4 className="media-heading user_name">Baltej Singh</h4>
+                </p>
+              </a>
+              <div className="media-body"></div>
+            </div>
+            <strong className="me-auto"></strong>
+            <button
+              type="button"
+              className="btn btn-danger"
+              data-bs-dismiss=""
+              aria-label=""
+            >
+              <i class="bi bi-save">save</i>
+            </button>{" "}
             <button
               type="button"
               className="btn-close"
@@ -166,16 +81,24 @@ function OnePost(props) {
               aria-label="Close"
             ></button>
           </div>
+          <div>
+            <small>11 mins ago</small>
+            <h6>Title</h6>
+            <p>Description</p>
+          </div>
           <div className="toast-body">
+            <h5>Comments</h5>
             <div className="media">
               <p className="pull-right">
                 <small>5 days ago</small>
               </p>
               <a className="media-left" href="#">
                 <img
-                  src="http://lorempixel.com/40/40/people/1/"
+                  src="https://th.bing.com/th/id/OIP.BVbNgsb0pic_Ju-OKXrU3QAAAA?w=270&h=270&rs=1&pid=ImgDetMain"
                   alt="User Avatar"
                   className="img-circle"
+                  width="50"
+                  height="50"
                 />
               </a>
               <div className="media-body">
@@ -183,7 +106,7 @@ function OnePost(props) {
                 Wow! this is really great.
                 <p>
                   <small>
-                    <a href="">Like</a> - <a href="">Share</a>
+                    <a href="#">Like</a> - <a href="#">Share</a>
                   </small>
                 </p>
               </div>
@@ -194,9 +117,11 @@ function OnePost(props) {
               </p>
               <a className="media-left" href="#">
                 <img
-                  src="http://lorempixel.com/40/40/people/2/"
+                  src="https://th.bing.com/th/id/OIP.BVbNgsb0pic_Ju-OKXrU3QAAAA?w=270&h=270&rs=1&pid=ImgDetMain"
                   alt="User Avatar"
                   className="img-circle"
+                  width="50"
+                  height="50"
                 />
               </a>
               <div className="media-body">
@@ -204,7 +129,7 @@ function OnePost(props) {
                 Wow! this is really great.
                 <p>
                   <small>
-                    <a href="">Like</a> - <a href="">Share</a>
+                    <a href="#">Like</a> - <a href="#">Share</a>
                   </small>
                 </p>
               </div>

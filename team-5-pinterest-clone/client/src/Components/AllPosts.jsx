@@ -8,15 +8,20 @@ function AllPosts(props) {
   const handleDetails = (obj) => {
     setDetails((prevDetails) => !prevDetails);
     props.set(obj);
+
+    // Scroll to the top of the page
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
   return (
     <div>
-      {details && <OnePost  one={props.one}/>}
-    <div className="allposts">
-      {props.data.map((el, i) => (
-        <Post data={el} users={users} handle={handleDetails}/>
-      ))}
-    </div></div>
+      {details && <OnePost one={props.one} />}
+      <div className="allposts">
+        {props.data.map((el, i) => (
+          <Post data={el} users={users} handle={handleDetails} />
+        ))}
+      </div>
+    </div>
   );
 }
 
