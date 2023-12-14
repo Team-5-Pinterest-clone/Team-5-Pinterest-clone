@@ -13,7 +13,7 @@ import {
 
 export default function EditButton() {
   return (
-    <div className="gradient-custom-2" style={{ backgroundColor: "#9de2ff" }}>
+    <div className="gradient-custom-2" style={{ backgroundColor: "" }}>
       <MDBContainer className="py-5 h-100">
         <MDBRow className="justify-content-center align-items-center h-100">
           <MDBCol lg="9" xl="7">
@@ -77,12 +77,6 @@ export default function EditButton() {
                   <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
                     <MDBCardText className="font-italic mb-1">
                       Web Developer
-                    </MDBCardText>
-                    <MDBCardText className="font-italic mb-1">
-                      Lives in New York
-                    </MDBCardText>
-                    <MDBCardText className="font-italic mb-0">
-                      Photographer
                     </MDBCardText>
                   </div>
                 </div>

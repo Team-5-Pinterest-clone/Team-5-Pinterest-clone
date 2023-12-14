@@ -1,62 +1,63 @@
 import React, { useState } from "react";
 import axios from "axios";
+
 function CreatePost() {
-  const [ProductName, setProductName] = useState("");
-  const [ProductsDescription, SetProductsDescription] = useState("");
-  const [productsPrix, setProductsPrix] = useState(0);
-  const [productsColler, setproductsColler] = useState("");
-  const [productstock, setproductstock] = useState(0);
-  const [category, setcategory] = useState("");
-  const [productsImage, setproductsImage] = useState("");
   const [file, setFile] = useState(null);
   const [url, setUrl] = useState("");
-  const [image, setImage] = useState(null);
-
-  axios
-    .post("http://localhost:3000/api/dashboard/createProduct", {
-      ProductName: ProductName,
-      ProductsDescription: ProductsDescription,
-      productstock: productstock,
-      productsPrix: productsPrix,
-      productsColler: productsColler,
-      productsImage: productsImage,
-      category: category,
-      users_idusers: 37,
-    })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-
-  // const handleImageChange = (e) => {
-  //   const file = e.target.files[0];
-  //   setproductsImage(file);
-  // };
+  const [image, setImage] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [link, setLink] = useState("");
+  const [board, setBoard] = useState("");
+  const [category, setCategory] = useState("");
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
+    const selectedFile = e.target.files[0];
+
+    if (selectedFile) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(selectedFile);
+      setFile(selectedFile);
     }
   };
 
-  const uploadImage = async () => {
-    const form = new FormData();
-    form.append("file", file);
-    form.append("upload_preset", "amineguezmir");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    await axios
-      .post("https://api.cloudinary.com/v1_1/dj6zjioi8/upload", form)
-      .then((result) => {
-        setUrl(result.data.secure_url);
-      });
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "amineguezmir");
+
+    try {
+      const result = await axios.post(
+        "https://api.cloudinary.com/v1_1/dj6zjioi8/upload",
+        formData
+      );
+
+      setUrl(result.data.secure_url);
+
+      const otherFormData = {
+        title,
+        description,
+        link,
+        board,
+        category,
+      };
+
+      const response = await axios.post(
+        "http://localhost:8800/api/users/addPost",
+        otherFormData
+      );
+
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
+  console.log(title);
   return (
     <div className="d-flex flex-column justify-content-center align-items-center vh-100">
       <div>CreatePost</div>
@@ -71,23 +72,35 @@ function CreatePost() {
             <div>
               <label htmlFor="formFileLg" className="form-label">
                 <p>Choose a file or drag and drop it here</p>
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <i
+                      className="bi bi-images"
+                      style={{ fontSize: "50px" }}
+                    ></i>
+                  </div>
+                </div>
               </label>
-              <input
-                onChange={handleImageChange}
-                className="form-control form-control-lg"
-                id="formFileLg"
-                type="file"
-                value={file}
-                onChange={(e) => setFile(e.target.files[0])}
-              />
 
-              {/* <div>
-                <input type="file" onChange={handleImageChange} />
-                {image && <img src={image} alt="Uploaded" />}
-              </div> */}
+              <label htmlFor="formFileLg" className="">
+                <i className="visually-hidden">Choose an Image</i>
+                <input
+                  onChange={handleImageChange}
+                  style={{ display: "none" }}
+                  className="form-control form-control-lg"
+                  id="formFileLg"
+                  type="file"
+                />
+              </label>
               <p>
-                we recommend using high quality .jpg files
-                <br></br> less than 20MB or .mp4 files less than 200MB.
+                We recommend using high-quality .jpg files less than 20MB or
+                .mp4 files less than 200MB.
               </p>
               <div>
                 {image && (
@@ -101,13 +114,14 @@ function CreatePost() {
             </div>
           </figure>
         </div>
+
         <div
           className="toast fade show"
           role="alert"
           aria-live="assertive"
           aria-atomic="true"
         >
-          <form className="fixdirection mb-3">
+          <form className="fixdirection mb-3" onSubmit={handleSubmit}>
             <label className="form-label">
               <p>Title</p>
               <input
@@ -116,10 +130,8 @@ function CreatePost() {
                 placeholder="Add a title"
                 type="text"
                 name="Title"
-                onChange={(e) => {
-                  setProductName(e.target.value);
-                }}
-                requiredTitle
+                onChange={(e) => setTitle(e.target.value)}
+                required
               />
             </label>
 
@@ -131,9 +143,7 @@ function CreatePost() {
                 placeholder="Add a detailed description"
                 name="Description"
                 type="text"
-                onChange={(e) => {
-                  SetProductsDescription(e.target.value);
-                }}
+                onChange={(e) => setDescription(e.target.value)}
                 required
               />
             </label>
@@ -146,9 +156,7 @@ function CreatePost() {
                 placeholder="Add a link:"
                 name="Add a link"
                 type="text"
-                onChange={(e) => {
-                  setproductstock(e.target.value);
-                }}
+                onChange={(e) => setLink(e.target.value)}
                 required
               />
             </label>
@@ -161,37 +169,10 @@ function CreatePost() {
                 placeholder=" Choose a Board:"
                 name="Board"
                 type="text"
-                onChange={(e) => {
-                  setProductsPrix(e.target.value);
-                }}
+                onChange={(e) => setBoard(e.target.value)}
                 required
               />
             </label>
-
-            {/* <label className="form-label">
-              <input
-                className="form-control"
-                id="formGroupExampleInput"
-                placeholder="  Color:"
-                type="text"
-                name="productsColler"
-                onChange={(e) => {
-                  setproductsColler(e.target.value);
-                }}
-                required
-              />
-            </label> */}
-            {/* 
-            <label className="form-label">
-              <input
-                className="form-control"
-                id="formGroupExampleInput"
-                placeholder=" Image Upload:"
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-              />
-            </label> */}
 
             <label className="form-label">
               <p>Category</p>
@@ -201,14 +182,11 @@ function CreatePost() {
                 placeholder="Category:"
                 type="text"
                 name="category"
-                onChange={(e) => {
-                  setcategory(e.target.value);
-                }}
+                onChange={(e) => setCategory(e.target.value)}
                 required
               />
             </label>
-
-            <button className="btn btn-primary" onClick={() => CreatePost()}>
+            <button type="submit" className="btn btn-primary">
               Publish
             </button>
           </form>

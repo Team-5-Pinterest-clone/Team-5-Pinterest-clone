@@ -1,151 +1,14 @@
-// import React, { useState } from "react";
-
-// function OnePost(props) {
-// // function OnePost(props) {
-
-//   const [isPopupOpen, setPopupOpen] = useState(false);
-
-//   const handlePostClick = () => {
-//     setPopupOpen(true);
-//   };
-
-//   const closePopup = () => {
-//     setPopupOpen(false);
-//   };
-//   return (
-//     <div className="postCard" onClick={handlePostClick}>
-//       <div className="postContainer">
-//         <img src={props.data.photo} alt="" className="postimg" />
-//         <div className="userOverlay">
-//           <img
-//             src={props.users[props.data.userIndex].photo}
-//             alt=""
-//             className="userimg"
-//           />
-//           <h2>{props.users[props.data.userIndex].username}</h2>
-//         </div>
-//       </div>
-//     </div>
-// //   );
-// function OnePost() {
-//   return (
-//     <div className="d-flex flex-column justify-content-center align-items-center vh-100">
-//       <div>OnePost</div>
-
-//       <div className="d-flex flex-row justify-content-center align-self-center">
-//         <figure className="figure">
-//           <img
-//             src="https://i.pinimg.com/originals/20/a8/f2/20a8f25a0e7a3b1b11813e5c27c64382.jpg"
-//             className="figure-img img-fluid rounded"
-//             width="400"
-//             height="600"
-//             alt=""
-//           />
-//         </figure>
-
-//         <div
-//           className="toast fade show"
-//           role="alert"
-//           aria-live="assertive"
-//           aria-atomic="true"
-//         >
-//           <div className="toast-header">
-//             <strong className="me-auto">Comments</strong>
-//             <small>11 mins ago</small>
-//             <button
-//               type="button"
-//               className="btn-close"
-//               data-bs-dismiss="toast"
-//               aria-label="Close"
-//             ></button>
-//           </div>
-//           <div className="toast-body">
-//             No comments yet! Add one to start the conversation. pls add hier
-//             this code
-//             <div>
-//               <figure className="figure">
-//                 <img
-//                   src="https://i.pinimg.com/originals/20/a8/f2/20a8f25a0e7a3b1b11813e5c27c64382.jpg"
-//                   className="figure-img img-fluid rounded"
-//                   width="50"
-//                   height="50"
-//                   alt=""
-//                 />
-//               </figure>
-
-//               <span>comment exampel</span>
-//             </div>
-//             <div>
-//               <figure className="figure">
-//                 <img
-//                   src="https://i.pinimg.com/originals/20/a8/f2/20a8f25a0e7a3b1b11813e5c27c64382.jpg"
-//                   className="figure-img img-fluid rounded"
-//                   width="50"
-//                   height="50"
-//                   alt=""
-//                 />
-//               </figure>
-
-//               <span>comment exampel</span>
-//             </div>
-//             <div>
-//               <figure className="figure">
-//                 <img
-//                   src="https://i.pinimg.com/originals/20/a8/f2/20a8f25a0e7a3b1b11813e5c27c64382.jpg"
-//                   className="figure-img img-fluid rounded"
-//                   width="50"
-//                   height="50"
-//                   alt=""
-//                 />
-//               </figure>
-
-//               <span>comment exampel</span>
-//             </div>
-//           </div>
-//           <div className="mb-3">
-//             <p> 8 Comments</p>
-//             <figure className="figure">
-//               <img
-//                 src="https://i.pinimg.com/originals/20/a8/f2/20a8f25a0e7a3b1b11813e5c27c64382.jpg"
-//                 className="figure-img img-fluid rounded"
-//                 width="50"
-//                 height="50"
-//                 alt=""
-//               />
-//             </figure>
-//             <label htmlFor="exampleFormControlTextarea1" className="form-label">
-//               <textarea
-//                 className="form-control"
-//                 id="formGroupExampleInput"
-//                 placeholder="Add a comment"
-//                 type="text"
-//                 name="Title"
-//                 requiredTitle
-//               />
-//             </label>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default OnePost;
-
 import React from "react";
 
 function OnePost(props) {
   return (
-    <div className="d-flex flex-column justify-content-center align-items-center vh-100">
-
-
-      <div className="d-flex flex-row justify-content-center align-self-center">
-        <figure className="figure">
+    <div className="d-flex flex-column justify-content-center align-items-center vh-100 card ">
+      <div className="d-flex flex-row justify-content-center align-self-center card-body posts">
+        <figure className="figure ">
           <img
             src={props.one.photo}
-            className="figure-img img-fluid rounded"
-            width="400"
-            height="600"
+            className="figure-img img-fluid rounded posts"
+            style={{ maxWidth: "400px", maxHeight: "600px" }}
             alt=""
           />
         </figure>
@@ -155,86 +18,112 @@ function OnePost(props) {
           role="alert"
           aria-live="assertive"
           aria-atomic="true"
+          style={{ maxWidth: "400px", maxHeight: "600px" }}
         >
-          <div className="toast-header">
-            <strong className="me-auto">Comments</strong>
-            <small>11 mins ago</small>
+          <div className="toast-header ">
+            <div className="media d-flex">
+              <a className="media-left" href="#">
+                <span className="d-flex">
+                  <img
+                    src={props.user.photo}
+                    alt="User Avatar"
+                    className="img-circle"
+                    width="30px"
+                    height="30px"
+                  />{" "}
+                  <h4 className="media-heading user_name">{props.user.username}</h4>
+                </span>
+              </a>
+            </div>
+            <strong className="me-auto"></strong>
+            <button
+              type="button"
+              className="btn btn-danger"
+              data-bs-dismiss=""
+              aria-label=""
+            >
+              <i class="bi bi-save">save</i>
+            </button>{" "}
             <button
               type="button"
               className="btn-close"
               data-bs-dismiss="toast"
               aria-label="Close"
+              onClick={()=>props.set(false)}
             ></button>
+          </div>
+          <div className="card-body">
+            <h5>Title</h5>
+            <small>{props.one.createdAt}</small>
+            <h5>Description</h5>
+            <p>
+              {props.one.description}
+            </p>{" "}
+            <h5>Comments</h5>
           </div>
           <div className="toast-body">
             <div className="media">
               <p className="pull-right">
                 <small>5 days ago</small>
               </p>
-              <a className="media-left" href="#">
-                <img
-                  src="http://lorempixel.com/40/40/people/1/"
-                  alt="User Avatar"
-                  className="img-circle"
-                />
-              </a>
-              <div className="media-body">
-                <h4 className="media-heading user_name">Baltej Singh</h4>
-                Wow! this is really great.
-                <p>
-                  <small>
-                    <a href="">Like</a> - <a href="">Share</a>
-                  </small>
-                </p>
+              <div className="media d-flex">
+                <a className="media-left" href="#">
+                  <span className="d-flex">
+                    <img
+                      src="https://th.bing.com/th/id/OIP.BVbNgsb0pic_Ju-OKXrU3QAAAA?w=270&h=270&rs=1&pid=ImgDetMain"
+                      alt="User Avatar"
+                      className="img-circle"
+                      width="30px"
+                      height="30px"
+                    />{" "}
+                    <h4 className="media-heading user_name">Baltej Singh</h4>
+                  </span>
+                </a>
               </div>
-            </div>
-            <div className="media">
-              <p className="pull-right">
-                <small>5 days ago</small>
-              </p>
-              <a className="media-left" href="#">
-                <img
-                  src="http://lorempixel.com/40/40/people/2/"
-                  alt="User Avatar"
-                  className="img-circle"
-                />
-              </a>
-              <div className="media-body">
-                <h4 className="media-heading user_name">Baltej Singh</h4>
+              <div className="media-body ">
                 Wow! this is really great.
                 <p>
                   <small>
-                    <a href="">Like</a> - <a href="">Share</a>
+                    <a href="#">Like</a> - <a href="#">Share</a>
                   </small>
                 </p>
               </div>
             </div>
           </div>
-          <div className="mb-3">
+          <div className="mb-3 card-body">
             <p>8 Comments</p>
-            <div className="media">
+            <div className="media d-flex">
               <figure className="figure">
                 <img
-                  src="https://i.pinimg.com/originals/20/a8/f2/20a8f25a0e7a3b1b11813e5c27c64382.jpg"
+                  src="https://th.bing.com/th/id/OIP.BVbNgsb0pic_Ju-OKXrU3QAAAA?w=270&h=270&rs=1&pid=ImgDetMain"
                   className="figure-img img-fluid rounded"
-                  width="50"
-                  height="50"
+                  width="30px"
                   alt=""
                 />
               </figure>
               <label htmlFor="formGroupExampleInput" className="form-label">
                 <div className="input-group">
-                  <textarea
-                    className="form-control"
-                    id="formGroupExampleInput"
-                    placeholder="Add a comment"
-                    type="text"
-                    name="Title"
-                    requiredTitle
-                  />
+                  <div class="form-floating">
+                    <textarea
+                      className="form-control"
+                      placeholder="Leave a comment here"
+                      id="floatingTextarea2"
+                      control-id="ControlID-17"
+                    ></textarea>
+                  </div>
                   <span className="input-group-text">
-                    <i className="bi bi-image"></i>
+                    <label htmlFor="formFileLg" className="bi bi-image">
+                      <i className="visually-hidden">Choose an Image</i>
+                      <input
+                        //onChange={handleImageChange}
+                        style={{ display: "none" }}
+                        className="form-control form-control-lg"
+                        id="formFileLg"
+                        type="file"
+                      />
+                    </label>
                   </span>
+
                   <span>
                     <button type="button">done</button>
                   </span>
