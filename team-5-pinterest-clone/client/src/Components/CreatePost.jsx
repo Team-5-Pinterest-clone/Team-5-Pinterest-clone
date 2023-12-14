@@ -72,13 +72,32 @@ function CreatePost() {
             <div>
               <label htmlFor="formFileLg" className="form-label">
                 <p>Choose a file or drag and drop it here</p>
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <i
+                      className="bi bi-images"
+                      style={{ fontSize: "50px" }}
+                    ></i>
+                  </div>
+                </div>
               </label>
-              <input
-                onChange={handleImageChange}
-                className="form-control form-control-lg"
-                id="formFileLg"
-                type="file"
-              />
+
+              <label htmlFor="formFileLg" className="">
+                <i className="visually-hidden">Choose an Image</i>
+                <input
+                  onChange={handleImageChange}
+                  style={{ display: "none" }}
+                  className="form-control form-control-lg"
+                  id="formFileLg"
+                  type="file"
+                />
+              </label>
               <p>
                 We recommend using high-quality .jpg files less than 20MB or
                 .mp4 files less than 200MB.

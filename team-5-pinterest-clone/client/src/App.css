@@ -1,155 +1,186 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #232323;
+  padding: 10px;
+  color: white;
+}
 
-.nav{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #232323;
-    padding: 10px;
-    color: white;
-    }
-    .alltext{
-      display: flex;
-      flex-direction: row;
-      gap: 10px;
-    }
-    .inptandbtn{
-      width: 500px;
-    } 
-    .searchinpt{
-      background-color: rgb(237, 237, 237);
-      border: solid transparent;
-      border-radius: 5px;
-      width:450px;
-      height: 20px;
-    }
-    .srchbtn{
-      position: absolute;
-      right: 0;
-      top: 2px;
-      border: solid transparent;
-      background-color: transparent;
-      color: black;
-    }
-    .nav_text{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: solid transparent;
-      border-radius: 8px;
-      font-family:Arial, Helvetica, sans-serif;
-      color: #ffffff;
-    }
-    .nav_home{
-        font-family:Arial, Helvetica, sans-serif;
-        color:#ffffff;
-      }
-      .hometitle{
-        color: #00c3ff;
-        font-family:Arial, Helvetica, sans-serif;
-        width: 500px;
-      }
-      .hometxt{
-        color: #56838d;
-        font-family:Arial, Helvetica, sans-serif;
-        width: 500px;
-      }
-      .homebtn {
-        display: inline-block;
-        padding: 15px 30px;
-        font-size: 18px;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-        cursor: pointer;
-        background-color: #00d9ff; /* Green color, modify to fit your palette */
-        color: #fff; /* White text color */
-        border: 2px solid #00d9ff; /* Border color matches background initially */
-        border-radius: 25px;
-        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-      }
-      
-      .homebtn:hover {
-        background-color: #fff; /* White on hover */
-        color: #00d9ff; /* Green text on hover */
-        border-color: #fff; /* White border on hover */
-      }
-    .homebg{
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      height: 100vh;
-      animation: changeBackground 30s infinite;
-      background-size: cover;
-    }
-    @keyframes changeBackground {
-        0% {
-          background-image: url('https://i.pinimg.com/564x/ce/86/a1/ce86a1f567111506425d0e3ca34ef16b.jpg');
-        }
-        25% {
-          background-image: url('https://cdn.pixabay.com/photo/2023/10/23/14/22/trees-8336189_1280.jpg');
-        }
-        50% {
-          background-image: url('https://cdn.pixabay.com/photo/2023/12/09/15/04/dog-8439530_1280.jpg');
-        }
-        75% {
-          background-image: url('https://cdn.pixabay.com/photo/2016/03/27/16/23/woman-1283009_1280.jpg');
-        }
-        50%{
-            background-image: url('https://cdn.pixabay.com/photo/2020/12/22/12/38/cat-5852139_1280.jpg');
-        }
-      }
-      .myimg{
-        width: 50px;
-        border: solid transparent;
-        border-radius: 50px;
-      }
-      .allposts {
-        margin-top: 10px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 5px;
-      }
-      .postCard {
-        position: relative;
-        overflow: hidden;
-      }
-      
-      .postContainer {
-        position: relative;
-      }
-      
-      .userOverlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 0; /* Initially hidden */
-        transition: opacity 0.3s ease; /* Add a smooth transition effect */
-      }
-      
-      .postCard:hover .userOverlay {
-        opacity: 1; /* Make the userOverlay visible on hover */
-      }
-      .postimg{
-        width: 100%;
-        height: 500px;
-        border: solid transparent 0px;
-        border-radius: 15px;
-        cursor: pointer;
-      }
-      .userdiv{
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-top: 10px;
-      }
-      .userimg {
-        width: 50px; /* Adjust as needed */
-        height: 50px; /* Adjust as needed */
-        border-radius: 50%;
-        object-fit: cover;
-      }
+.alltext {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.inptandbtn {
+  width: 500px;
+}
+
+.searchinpt {
+  background-color: rgb(237, 237, 237);
+  border: solid transparent;
+  border-radius: 5px;
+  width: 450px;
+  height: 20px;
+}
+
+.srchbtn {
+  position: absolute;
+  right: 0;
+  top: 2px;
+  border: solid transparent;
+  background-color: transparent;
+  color: black;
+}
+
+.nav_text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid transparent;
+  border-radius: 8px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #ffffff;
+}
+
+.nav_home {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #ffffff;
+}
+
+.hometitle {
+  color: #00c3ff;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 500px;
+}
+
+.hometxt {
+  color: #56838d;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 500px;
+}
+
+.homebtn {
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: #00d9ff;
+  /* Green color, modify to fit your palette */
+  color: #fff;
+  /* White text color */
+  border: 2px solid #00d9ff;
+  /* Border color matches background initially */
+  border-radius: 25px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.homebtn:hover {
+  background-color: #fff;
+  /* White on hover */
+  color: #00d9ff;
+  /* Green text on hover */
+  border-color: #fff;
+  /* White border on hover */
+}
+
+.homebg {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  animation: changeBackground 30s infinite;
+  background-size: cover;
+}
+
+@keyframes changeBackground {
+  0% {
+    background-image: url('https://i.pinimg.com/564x/ce/86/a1/ce86a1f567111506425d0e3ca34ef16b.jpg');
+  }
+
+  25% {
+    background-image: url('https://cdn.pixabay.com/photo/2023/10/23/14/22/trees-8336189_1280.jpg');
+  }
+
+  50% {
+    background-image: url('https://cdn.pixabay.com/photo/2023/12/09/15/04/dog-8439530_1280.jpg');
+  }
+
+  75% {
+    background-image: url('https://cdn.pixabay.com/photo/2016/03/27/16/23/woman-1283009_1280.jpg');
+  }
+
+  50% {
+    background-image: url('https://cdn.pixabay.com/photo/2020/12/22/12/38/cat-5852139_1280.jpg');
+  }
+}
+
+.myimg {
+  width: 50px;
+  border: solid transparent;
+  border-radius: 50px;
+}
+
+.posts {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+}
+
+.postCard {
+  position: relative;
+  overflow: hidden;
+}
+
+.postContainer {
+  position: relative;
+}
+
+.userOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  /* Initially hidden */
+  transition: opacity 0.3s ease;
+  /* Add a smooth transition effect */
+}
+
+.postCard:hover .userOverlay {
+  opacity: 1;
+  /* Make the userOverlay visible on hover */
+}
+
+.postimg {
+  width: 100%;
+  height: 500px;
+  border: solid transparent 0px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.userdiv {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.userimg {
+  width: 50px;
+  /* Adjust as needed */
+  height: 50px;
+  /* Adjust as needed */
+  border-radius: 50%;
+  object-fit: cover;
+}

@@ -16,7 +16,7 @@ function AllPosts(props) {
   return (
     <div>
       {details && <OnePost one={props.one} />}
-      <div className="allposts">
+      <div className="posts">
         {props.data.map((el, i) => (
           <Post data={el} users={users} handle={handleDetails} />
         ))}

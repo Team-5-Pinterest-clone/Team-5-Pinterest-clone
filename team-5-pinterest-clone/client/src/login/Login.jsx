@@ -22,7 +22,6 @@ function Login() {
         console.log(error);
       });
   }, []);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const user = users.find((user) => user.username === username);
@@ -33,77 +32,78 @@ function Login() {
         password,
         hashedPasswordFromDatabase
       );
+
+      if (passwordMatch) {
+        console.log("User exists!");
+        toast.dark("Login successful ! Redirecting you to the home page ! ", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          style: {
+            backgroundColor: "#1E1E1E",
+            color: "#FFFFFF",
+            fontFamily: "Arial, sans-serif",
+            fontWeight: "bold",
+          },
+        });
+        setTimeout(() => {
+          window.location.href = "/register";
+        }, 2000);
+      } else {
+        console.log("User not found.");
+        toast.error("Invalid username or password!", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          style: {
+            backgroundColor: "#1E1E1E",
+            color: "#FFFFFF",
+            fontFamily: "Arial, sans-serif",
+            fontWeight: "bold",
+          },
+        });
+      }
     }
-    if (user) {
-      console.log("User exists!");
-      toast.dark("Login successful ! Redirecting you to the home page ! ", {
-        position: "bottom-center",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        style: {
-          backgroundColor: "#1E1E1E",
-          color: "#FFFFFF",
-          fontFamily: "Arial, sans-serif",
-          fontWeight: "bold",
-        },
-      });
-      setTimeout(() => {
-        window.location.href = "/register";
-      }, 2000);
-    } else {
-      console.log("User not found.");
-      toast.error("Invalid username or password!", {
-        position: "bottom-center",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        style: {
-          backgroundColor: "#1E1E1E",
-          color: "#FFFFFF",
-          fontFamily: "Arial, sans-serif",
-          fontWeight: "bold",
-        },
-      });
-    }
+
+    return (
+      <form onSubmit={handleSubmit} className="login-form">
+        <h1>Login to your account!</h1>
+        <label htmlFor="username-input">Your Username:</label>
+        <input
+          type="username"
+          id="username-input"
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
+          className="login-input"
+        />
+
+        <label htmlFor="password-input">Your Password:</label>
+        <input
+          type="password"
+          id="password-input"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          className="login-input"
+        />
+
+        <button type="submit" className="login-button">
+          Login
+        </button>
+        <p className="create-account">Don't have an account?</p>
+        <Link to="/register" className="create-account-link">
+          Create Account
+        </Link>
+        <ToastContainer />
+      </form>
+    );
   };
-
-  return (
-    <form onSubmit={handleSubmit} className="login-form">
-      <h1>Login to your account !</h1>
-      <label htmlFor="username-input">Your Username:</label>
-      <input
-        type="username"
-        id="username-input"
-        value={username}
-        onChange={(event) => setUsername(event.target.value)}
-        className="login-input"
-      />
-
-      <label htmlFor="password-input">Your Password:</label>
-      <input
-        type="password"
-        id="password-input"
-        value={password}
-        onChange={(event) => setPassword(event.target.value)}
-        className="login-input"
-      />
-
-      <button type="submit" className="login-button">
-        Login
-      </button>
-      <p className="create-account">Don't have an account?</p>
-      <Link to="/register" className="create-account-link">
-        Create Account
-      </Link>
-      <ToastContainer />
-    </form>
-  );
 }
 export default Login;
