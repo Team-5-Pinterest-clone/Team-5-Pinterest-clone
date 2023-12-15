@@ -3,14 +3,14 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import axios from 'axios'
+import axios from "axios";
 //import IconButton from "@material-ui/core/IconButton";
 import { MDBCardText } from "mdb-react-ui-kit";
 import { RWebShare } from "react-web-share"; // Import the sharing component
 
 function OnePost(props) {
-  const [comment,setComment]=useState([])
-  const [refresh,setRefresh]=useState(false)
+  const [comment, setComment] = useState([]);
+  const [refresh, setRefresh] = useState(false);
   // useEffect(() => {
   //   axios
   //     .get(`http://localhost:8800/api/users/getOneComment/${props.one.idpostes}`)
@@ -29,14 +29,18 @@ function OnePost(props) {
   useEffect(() => {
     // Fetch comments for a specific post ID from the backend API
     axios
-      .get(`http://localhost:8800/api/users/getOneComment/${props.one.idpostes}`)
+      .get(
+        `http://localhost:8800/api/users/getOneComment/${props.one.idpostes}`
+      )
       .then((result) => {
         // Create an array of promises to fetch user info for each comment
         const commentPromises = result.data.map((comment) => {
           // For each comment, fetch user info based on the user ID associated with the comment
-          return axios.get(`http://localhost:8800/api/users/getOneUserid/${comment.users_idUsers}`);
+          return axios.get(
+            `http://localhost:8800/api/users/getOneUserid/${comment.users_idUsers}`
+          );
         });
-  
+
         // Resolve all promises to get user info for each comment
         Promise.all(commentPromises)
           .then((responses) => {
@@ -47,7 +51,7 @@ function OnePost(props) {
                 userInfo: responses[i].data[0], // Attaching user info to the comment
               };
             });
-  
+
             // Update state with comments including user info
             setComment(updatedComments);
           })
@@ -56,13 +60,16 @@ function OnePost(props) {
       .catch((err) => {
         console.error(err); // Handle errors in fetching comments from the backend API
       });
-  }, [props.one.idpostes,refresh]); // Trigger this effect whenever props.one.idpostes changes
- 
-  const handleLike=(id,likes)=>{
-    axios.put(`http://localhost:8800/api/users/updateCommentLike/${id}`,{like:likes+1})
-    .then((res)=>setRefresh(!refresh))
-    .catch((err)=>console.log(err))
-  }
+  }, [props.one.idpostes, refresh]); // Trigger this effect whenever props.one.idpostes changes
+
+  const handleLike = (id, likes) => {
+    axios
+      .put(`http://localhost:8800/api/users/updateCommentLike/${id}`, {
+        like: likes + 1,
+      })
+      .then((res) => setRefresh(!refresh))
+      .catch((err) => console.log(err));
+  };
   return (
     <div
       className="d-flex flex-column justify-content-center align-items-center vh-100 card "
@@ -118,14 +125,13 @@ function OnePost(props) {
               <RWebShare
                 data={{
                   text: "Check out this post by " + props.user.username,
-                  url: "your-post-url", // Replace with the actual URL of your post
+                  url: "your-post-url",
                   title: "Post by " + props.user.username,
                 }}
                 onClick={() => console.log("shared successfully!")}
               >
-                <button type="button" className="btn p-3">
-                  <ShareIcon />
-                </button>
+                {" "}
+                <ShareIcon />
               </RWebShare>
             </button>
             <button
@@ -148,9 +154,10 @@ function OnePost(props) {
           </div>
           <div className="toast-body">
             <h5>Comments</h5>
-                <div className="media">
-                  {comment.map((comment,i)=>{
-                    return (<div className="media-body ">
+            <div className="media">
+              {comment.map((comment, i) => {
+                return (
+                  <div className="media-body ">
                     <div className="p-2" style={{ backgroundColor: "#f8f9fa" }}>
                       <MDBCardText className="font-italic mb-1">
                         <div className="media d-flex">
@@ -164,7 +171,7 @@ function OnePost(props) {
                                 height="30px"
                               />{" "}
                               <h4 className="media-heading user_name px-2">
-                               {comment.userInfo.username}
+                                {comment.userInfo.username}
                               </h4>
                             </span>
                             <p className="pull-right">
@@ -175,14 +182,23 @@ function OnePost(props) {
                         {comment.body}
                         <p>
                           <small>
-                           {comment.like} <a href="#" onClick={()=>handleLike(comment.idcomment,comment.like)}>Like</a> 
+                            {comment.like}{" "}
+                            <a
+                              href="#"
+                              onClick={() =>
+                                handleLike(comment.idcomment, comment.like)
+                              }
+                            >
+                              Like
+                            </a>
                           </small>
                         </p>
                       </MDBCardText>
                     </div>
-                  </div>)
-                  })}
-                </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
           <div className="mb-3 card-body">
             <p>{comment.length} Comments</p>
