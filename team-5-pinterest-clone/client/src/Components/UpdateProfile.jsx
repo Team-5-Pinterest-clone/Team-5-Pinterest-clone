@@ -50,7 +50,10 @@ export default function EditButton(props) {
   const onChange = () => {};
 
   return (
-    <div className="gradient-custom-2" style={{ backgroundColor: "#fae0e4" }}>
+    <div
+      className="gradient-custom-2"
+      style={{ backgroundColor: "#7e777a", opacity: "0.9" }}
+    >
       <MDBContainer className="py-5 h-100">
         <MDBRow className="justify-content-center align-items-center h-100">
           <MDBCol lg="9" xl="7">

@@ -17,6 +17,7 @@ export default function EditButton(props) {
   const handleClick = () => {
     console.log("clicked");
     navigate("/updateProfile");
+    navigate("/createPost");
   };
 
   return (
@@ -77,7 +78,11 @@ export default function EditButton(props) {
                 </div>
                 <div className="d-flex justify-content-between align-items-center mb-2">
                   <p className="lead fw-normal mb-0">
-                    <button type="button" className="btn p-3">
+                    <button
+                      type="button"
+                      className="btn p-3"
+                      onClick={handleClick}
+                    >
                       {" "}
                       Create Pin
                     </button>
