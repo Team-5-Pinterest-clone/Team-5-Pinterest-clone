@@ -76,7 +76,7 @@ const getOnePost = (req, res) => {
 };
 
 const getOneComment = (req, res) => {
-  const sql = `SELECT * FROM comment WHERE idUsers=${req.params.idUsers}`;
+  const sql = `SELECT * FROM comment WHERE postes_idpostes=${req.params.idposts}`;
   db.query(sql, (err, result) => {
     res.send(result);
   });

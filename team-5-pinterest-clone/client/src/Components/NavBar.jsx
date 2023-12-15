@@ -1,33 +1,70 @@
-import React , {useState} from "react";
+// when user logs out = landingPage = for All visitors
 
-const NavigationBar =()=>{
-const search = (val,value) => {
-    let Url = ''
-    switch (value) {
-      case 'categories':
-        Url = `http://localhost:3000/api/users/searchByCategories/${val}`;
-        break;
-      case 'username':
-        Url = `http://localhost:3000/api/users/searchByUsername/${val}`;
-        break;
-      default:
-        console.error('not found');
-        return;
-    }
-    axios.get(Url)
-      .then((res) => {
-        setSearchdata(res.data)
-        setView("Search")
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+import React from 'react';
+import { emphasize, styled } from '@mui/material/styles';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Chip from '@mui/material/Chip';
+
+const StyledBreadcrumb = styled(Chip)(({ theme }) => {
+  const backgroundColor =
+    theme.palette.mode === 'light'
+      ? theme.palette.grey[200]
+      : theme.palette.grey[900];
+  return {
+    backgroundColor,
+    height: theme.spacing(3),
+    color: theme.palette.text.primary,
+    fontWeight: theme.typography.fontWeightRegular,
+    '&:hover, &:focus': {
+      backgroundColor: emphasize(backgroundColor, 0.06),
+    },
+    '&:active': {
+      boxShadow: theme.shadows[1],
+      backgroundColor: emphasize(backgroundColor, 0.12),
+    },
   };
+});
 
+function handleClick(event) {
+  event.preventDefault();
+  console.info('You clicked a breadcrumb.');
+}
+
+export default function CustomizedNavbar() {
   return (
-    <div className="navbar">
-        
+    <AppBar position="static" sx={{ backgroundColor: 'rgba(251, 251, 251, 1)' }}>
+      <Toolbar>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: 'black' }}>
+          Pintastic
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{
+            marginRight: '20px',
+            color: 'black',
+            borderRadius: '8px', // Adjust border-radius for rounded edges
+            padding: '8px 12px', // Adjust padding for softer look
+            transition: 'background-color 0.3s, color 0.3s', // Smooth transition
+            '&:hover': {
+              backgroundColor: 'black',
+              color: 'white',
+            },
+          }}
+        >
+          About Us
+        </Typography>
+        <div role="presentation" onClick={handleClick}>
+          <Typography variant="body1">
+            <Breadcrumbs aria-label="breadcrumb">
+              <StyledBreadcrumb component="a" href="#" label="Log in" />
+              <StyledBreadcrumb component="a" href="#" label="Sign up" />
+            </Breadcrumbs>
+          </Typography>
         </div>
-  )
-
+      </Toolbar>
+    </AppBar>
+  );
 }
