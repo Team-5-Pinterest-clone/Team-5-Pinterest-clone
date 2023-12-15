@@ -6,6 +6,8 @@ import TextField from "@mui/material/TextField";
 
 //import IconButton from "@material-ui/core/IconButton";
 import { MDBCardText } from "mdb-react-ui-kit";
+import { RWebShare } from "react-web-share"; // Import the sharing component
+
 function OnePost(props) {
   return (
     <div
@@ -59,7 +61,18 @@ function OnePost(props) {
               <FavoriteIcon />
             </button>{" "}
             <button type="button" className="btn p-3">
-              <ShareIcon />
+              <RWebShare
+                data={{
+                  text: "Check out this post by " + props.user.username,
+                  url: "your-post-url", // Replace with the actual URL of your post
+                  title: "Post by " + props.user.username,
+                }}
+                onClick={() => console.log("shared successfully!")}
+              >
+                <button type="button" className="btn p-3">
+                  <ShareIcon />
+                </button>
+              </RWebShare>
             </button>
             <button
               type="button "
@@ -107,7 +120,7 @@ function OnePost(props) {
                     Wow! this is really great.
                     <p>
                       <small>
-                        <a href="#">Like</a> - <a href="#">Share</a>
+                        <a href="#">Like</a>
                       </small>
                     </p>
                   </MDBCardText>
