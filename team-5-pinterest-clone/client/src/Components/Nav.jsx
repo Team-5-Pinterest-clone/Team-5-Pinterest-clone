@@ -16,6 +16,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import Avatar from "@mui/material/Avatar";
 import HomeIcon from "@mui/icons-material/Home";
 import CreateIcon from "@mui/icons-material/Create";
+import logo from "./photos/blackLogo.png"
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -69,7 +70,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
-    width: "100%",
+    width: "500px !important",
     [theme.breakpoints.up("md")]: {
       width: "20ch",
     },
@@ -118,7 +119,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <StyledMenuItem onClick={handleMenuClose}>Profile</StyledMenuItem>
-      <StyledMenuItem onClick={handleMenuClose}>My account</StyledMenuItem>
+      <StyledMenuItem onClick={handleMenuClose}>Edit profile</StyledMenuItem>
       <StyledMenuItem onClick={handleMenuClose}>log out</StyledMenuItem>
     </Menu>
   );
@@ -182,14 +183,16 @@ export default function PrimarySearchAppBar() {
         sx={{ backgroundColor: "rgba(251, 251, 251, 1)" }}
       >
         <Toolbar>
+        <img src={logo} alt="bug" width={50} height={50} />
           <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: "none", sm: "block" }, color: "black" }}
+            sx={{ display: { xs: "none", sm: "block" }, color: "black", marginLeft: '10px', }}
           >
             PinTastic
           </Typography>
+          <Box sx={{ flexGrow: 1 }} />
           <Search>
             <SearchIconWrapper>
               <SearchIcon />

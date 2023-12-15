@@ -7,6 +7,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Chip from '@mui/material/Chip';
+import logo from "./photos/blueLogo.png"
 
 const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   const backgroundColor =
@@ -37,17 +38,19 @@ export default function CustomizedNavbar() {
   return (
     <AppBar position="static" sx={{ backgroundColor: 'rgba(251, 251, 251, 1)' }}>
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: 'black' }}>
+      <img src={logo} alt="bug" width={50} height={50} />
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: 'black', marginLeft: '10px', }}>
           Pintastic
         </Typography>
+        <Box sx={{ flexGrow: 1 }} />
         <Typography
           variant="body1"
           sx={{
             marginRight: '20px',
             color: 'black',
-            borderRadius: '8px', // Adjust border-radius for rounded edges
-            padding: '8px 12px', // Adjust padding for softer look
-            transition: 'background-color 0.3s, color 0.3s', // Smooth transition
+            borderRadius: '8px',
+            padding: '8px 12px',
+            transition: 'background-color 0.3s, color 0.3s',
             '&:hover': {
               backgroundColor: 'black',
               color: 'white',
