@@ -16,7 +16,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import Avatar from "@mui/material/Avatar";
 import HomeIcon from "@mui/icons-material/Home";
 import CreateIcon from "@mui/icons-material/Create";
-import logo from "./photos/blackLogo.png"
+import logo from "./photos/blackLogo.png";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -37,8 +37,8 @@ const Search = styled("div")(({ theme }) => ({
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   color: "#000",
   "&:hover": {
-    backgroundColor: theme.palette.action.hover,
-    color: "#fff",
+    backgroundColor: alpha(theme.palette.common.black, 0.25),
+    color: "#000",
   },
 }));
 
@@ -183,12 +183,16 @@ export default function PrimarySearchAppBar() {
         sx={{ backgroundColor: "rgba(251, 251, 251, 1)" }}
       >
         <Toolbar>
-        <img src={logo} alt="bug" width={50} height={50} />
+          <img src={logo} alt="bug" width={50} height={50} />
           <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: "none", sm: "block" }, color: "black", marginLeft: '10px', }}
+            sx={{
+              display: { xs: "none", sm: "block" },
+              color: "black",
+              marginLeft: "10px",
+            }}
           >
             PinTastic
           </Typography>

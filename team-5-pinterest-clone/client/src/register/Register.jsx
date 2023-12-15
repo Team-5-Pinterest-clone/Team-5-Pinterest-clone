@@ -36,7 +36,7 @@ const Register = () => {
   const onChange = () => {};
 
   return (
-    <div className="register-container">
+    <div className="register-container mt-5">
       <h1>Create an account !</h1>
       <label htmlFor="username-input">Your Username:</label>
       <input
