@@ -1,7 +1,7 @@
 import "./App.css";
 import ReactDOM from "react-dom/client";
-import React, { useState,useEffect } from 'react';
-import axios from 'axios'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./Components/Nav.jsx";
 import Home from "./Components/Home.jsx";
@@ -10,8 +10,8 @@ import Register from "./register/Register.jsx";
 import Login from "./login/Login.jsx";
 import CreatePost from "./Components/CreatePost.jsx";
 import OnePost from "./Components/OnePost.jsx";
-import Profile from "./Components/Profile.jsx"
-import { DataProvider } from './Context.js';
+import Profile from "./Components/Profile.jsx";
+import { DataProvider } from "./Context.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";

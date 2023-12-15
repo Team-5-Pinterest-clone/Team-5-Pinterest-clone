@@ -1,6 +1,9 @@
 import React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+
 //import IconButton from "@material-ui/core/IconButton";
 import { MDBCardText } from "mdb-react-ui-kit";
 function OnePost(props) {
@@ -11,14 +14,14 @@ function OnePost(props) {
     >
       <div className="d-flex flex-row justify-content-center align-self-center card-body posts ">
         <figure
-          className="figure "
-          style={{ maxWidth: "400px", maxHeight: "600px" }}
+          className="figure"
+          style={{ maxWidth: "400px", maxHeight: "500px" }}
         >
           <img
             src={props.one.photo}
             className="figure-img img-fluid rounded posts"
-            style={{ maxWidth: "400px", maxHeight: "600px" }}
             alt=""
+            style={{ width: "400px", height: "650px" }}
           />
         </figure>
 
@@ -123,36 +126,59 @@ function OnePost(props) {
                   alt=""
                 />
               </figure>
+
               <label htmlFor="formGroupExampleInput" className="form-label">
                 <div className="input-group">
-                  <div class="form-floating">
-                    <textarea
-                      className="form-control"
-                      id="formGroupExampleInput"
-                      placeholder="Add a detailed description"
-                      name="Description"
-                      type="text"
-                      required
-                    />
-                  </div>
-                  <span className="input-group-text ">
-                    <label htmlFor="formFileLg" className="bi bi-image ">
-                      <i className="visually-hidden">Choose an Image</i>
-                      <input
-                        //onChange={handleImageChange}
-                        style={{ display: "none" }}
-                        className="form-control form-control-lg px-2 "
-                        id="formFileLg"
-                        type="file"
+                  <div className="form-floating">
+                    <Box
+                      sx={{
+                        width: 300,
+                        maxWidth: "100%",
+                        display: "flex",
+                        gap: "10px",
+                      }}
+                    >
+                      <TextField
+                        label="comment"
+                        id="fullWidth"
+                        placeholder="Add comment"
                       />
-                    </label>
-                  </span>
 
-                  <span>
-                    <button className="btn btn-danger px-2 " type="button">
-                      ✅
-                    </button>
-                  </span>
+                      <span
+                        className="btn-group"
+                        role="group"
+                        aria-label="Basic example"
+                      >
+                        <button type="button" className="btn btn-danger ">
+                          <label htmlFor="formFileLg" className="bi bi-image ">
+                            <input
+                              style={{ display: "none" }}
+                              className="form-control form-control-lg px-2"
+                              id="formFileLg"
+                              type="file"
+                            />
+                          </label>
+                        </button>
+                        <span
+                          style={{
+                            paddingLeft: "4px",
+                          }}
+                        >
+                          <button
+                            className="btn btn-danger"
+                            type="button"
+                            style={{
+                              paddingBottom: "10px",
+                            }}
+                          >
+                            <br />
+                            <i className="bi bi-send"></i> <br />
+                            <br />
+                          </button>
+                        </span>
+                      </span>
+                    </Box>
+                  </div>
                 </div>
               </label>
             </div>
