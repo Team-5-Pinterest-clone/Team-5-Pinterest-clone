@@ -22,10 +22,10 @@ USE `pinterestclone` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pinterestclone`.`users` (
   `idUsers` INT NOT NULL AUTO_INCREMENT,
-  `Username` VARCHAR(45) NOT NULL,
-  `Email` VARCHAR(45) NOT NULL,
-  `Photo` VARCHAR(255) NOT NULL,
-  `Bio` VARCHAR(255) NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `photo` VARCHAR(255) NOT NULL,
+  `bio` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`idUsers`))
 ENGINE = InnoDB
@@ -38,7 +38,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pinterestclone`.`saved` (
   `idsaved` INT NOT NULL AUTO_INCREMENT,
-  `Users_idUsers` INT NOT NULL,
+  `users_idUsers` INT NOT NULL,
   PRIMARY KEY (`idsaved`),
   INDEX `fk_saved_Users1_idx` (`Users_idUsers` ASC) VISIBLE,
   CONSTRAINT `fk_saved_Users1`
@@ -56,9 +56,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pinterestclone`.`postes` (
   `idpostes` INT NOT NULL AUTO_INCREMENT,
-  `Users_idUsers` INT NOT NULL,
-  `Description` VARCHAR(255) NOT NULL,
-  `Categories` VARCHAR(45) NOT NULL,
+  `users_idUsers` INT NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
+  `categories` VARCHAR(45) NOT NULL,
   `saved_idsaved` INT NOT NULL,
   `photo` VARCHAR(255) NOT NULL,
   `createdAt` DATETIME NOT NULL,
@@ -86,7 +86,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 CREATE TABLE IF NOT EXISTS `pinterestclone`.`comment` (
   `idcomment` INT NOT NULL AUTO_INCREMENT,
   `postes_idpostes` INT NOT NULL,
-  `Users_idUsers` INT NOT NULL,
+  `users_idUsers` INT NOT NULL,
   `createdAt` DATETIME NOT NULL,
   `body` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`idcomment`),
