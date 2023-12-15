@@ -9,17 +9,25 @@ import CreatePost from "./Components/CreatePost.jsx";
 import OnePost from "./Components/OnePost.jsx";
 import Profile from "./Components/Profile.jsx";
 import UpdateProfile from "./Components/UpdateProfile.jsx";
+import Search from "./Components/Search.jsx";
 import { DataProvider } from "./Context.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import SearchResult from "./Components/SearchResult.jsx";
 function App() {
+  const [results, setResults] = useState([]);
+
   return (
     <BrowserRouter>
       <DataProvider>
         <div>
           <Nav />
+          <div className="Search-container">
+            <Search setResults={setResults} />
+            <SearchResult results={results} />
+          </div>
         </div>
         <Routes>
           <Route index element={<Home />} />
@@ -30,6 +38,7 @@ function App() {
           <Route path="/OnePost" element={<OnePost />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/updateProfile" element={<UpdateProfile />} />
+          {/* <Route path="/search" element={<Search setResults={setResults} />} /> */}
         </Routes>
       </DataProvider>
     </BrowserRouter>

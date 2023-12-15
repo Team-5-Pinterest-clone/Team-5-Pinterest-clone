@@ -310,7 +310,7 @@ const deletePost = (req, res) => {
 
 const getComments = (req, res) => {
   const q = `
-    SELECT c.*, u.id AS userId, username, photo AS profilePic 
+    SELECT c.*, u.idUsers AS userId, username, photo AS profilePic 
     FROM comment AS c 
     JOIN users AS u ON (u.idUsers = c.users_idUsers) 
     WHERE c.postes_idpostes = ? 
@@ -473,7 +473,7 @@ module.exports = {
   getAllPosts,
   getAllComments,
   getOneUser,
-  getOneUserById ,
+  getOneUserById,
   getOnePost,
   getOneComment,
   getOneSavedByIdUsers,
