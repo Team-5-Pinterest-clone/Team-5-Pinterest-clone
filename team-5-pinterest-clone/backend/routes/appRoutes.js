@@ -33,7 +33,7 @@ router.put("/updatePostCat/:id", appController.updatePostCategories);
 router.put("/updatePostphoto/:id", appController.updatePostphoto);
 router.put("/updateComment/:id", appController.updateCommentBody);
 router.put("/updateUser/:id", appController.updateUser);
-
+router.put("/updateCommentLike/:id", appController.updateCommentLike);
 // Delete routes
 router.delete("/deleteSaved/:id", appController.deleteSaved);
 router.delete("/deletePost/:id", appController.deletePost);
