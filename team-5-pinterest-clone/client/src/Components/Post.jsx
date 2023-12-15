@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import axios from 'axios'
+import Link from '@mui/material/Link';
 function Post(props) {
   const [users,setUsers]=useState({})
   useEffect(() => {
@@ -19,6 +20,13 @@ function Post(props) {
       <div className='userOverlay'>
         <img src={users.photo} alt="" className='userimg' />
         <h2>{users.username}</h2>
+        <Link
+      component="button"
+      variant="body2"
+
+    >
+      {users.link}
+    </Link>
       </div>
     </div>
   </div>

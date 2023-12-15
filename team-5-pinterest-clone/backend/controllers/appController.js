@@ -213,17 +213,31 @@ const updatePostphoto = (req, res) => {
 const updateCommentBody = (req, res) => {
   const body = req.body.body;
   const id = req.params.id;
-  const sql = `UPDATE postes SET body =${body} WHERE idcomment =${id}`;
+  const sql = `UPDATE comment SET body =${body} WHERE idcomment =${id}`;
   db.query(sql, (err, result) => {
     if (err) {
       console.error(err);
     } else {
-      res.save(result);
+      res.send(result);
       console.log(result);
     }
   });
 };
+const updateCommentLike = (req, res) => {
+  const id = req.params.id;
+  const like = req.body.like; // Assuming req.body.like contains the updated value for 'like'
 
+  const sql = `UPDATE comment SET like = ${like} WHERE idcomment = ${id}`;
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Failed to update comment like' });
+    } else {
+      console.log(result);
+      res.status(200).json({ message: 'Comment like updated successfully' });
+    }
+  });
+};
 //Delete:
 const deleteSaved = (req, res) => {
   const sql = "delete from saved where idsaved ?";
@@ -310,7 +324,7 @@ const deletePost = (req, res) => {
 
 const getComments = (req, res) => {
   const q = `
-    SELECT c.*, u.idUsers AS userId, username, photo AS profilePic 
+    SELECT c.*, users.id AS users_idUsers, username, photo AS profilePic 
     FROM comment AS c 
     JOIN users AS u ON (u.idUsers = c.users_idUsers) 
     WHERE c.postes_idpostes = ? 
@@ -487,6 +501,7 @@ module.exports = {
   updatePostCategories,
   updatePostphoto,
   updateCommentBody,
+  updateCommentLike,
   deleteSaved,
   deletePost,
   createPost,
