@@ -17,6 +17,7 @@ import Avatar from "@mui/material/Avatar";
 import HomeIcon from "@mui/icons-material/Home";
 import CreateIcon from "@mui/icons-material/Create";
 import logo from "./photos/blackLogo.png";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -80,6 +81,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const navigate = useNavigate();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -100,6 +102,18 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  const handleClick = () => {
+    console.log("clicked");
+    navigate("/all-posts");
+  };
+  const handleRahma = () => {
+    console.log("clicked");
+    navigate("/createPost");
+  };
+  const handleGoToProfile = () => {
+    console.log("clicked");
+    navigate("/profile");
+  };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -118,8 +132,10 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <StyledMenuItem onClick={handleMenuClose}>Profile</StyledMenuItem>
-      <StyledMenuItem onClick={handleMenuClose}>Edit profile</StyledMenuItem>
+      <StyledMenuItem onClick={handleMenuClose && handleGoToProfile}>
+        Profile
+      </StyledMenuItem>
+
       <StyledMenuItem onClick={handleMenuClose}>log out</StyledMenuItem>
     </Menu>
   );
@@ -192,7 +208,9 @@ export default function PrimarySearchAppBar() {
               display: { xs: "none", sm: "block" },
               color: "black",
               marginLeft: "10px",
+              cursor: "pointer",
             }}
+            onClick={handleClick}
           >
             PinTastic
           </Typography>
@@ -212,6 +230,7 @@ export default function PrimarySearchAppBar() {
               size="large"
               aria-label="show all posts"
               color="inherit"
+              onClick={handleClick}
             >
               <Badge color="error">
                 <HomeIcon />
@@ -221,6 +240,7 @@ export default function PrimarySearchAppBar() {
               size="large"
               aria-label="Create post"
               color="inherit"
+              onClick={handleRahma}
             >
               <Badge color="error">
                 <CreateIcon />

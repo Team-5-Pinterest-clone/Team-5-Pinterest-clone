@@ -42,6 +42,10 @@ export default function EditButton(props) {
       setErr(err.response.data);
     }
   };
+  const handleGoToProfile = () => {
+    console.log("clicked");
+    navigate("/profile");
+  };
 
   const onChange = () => {};
 
@@ -135,21 +139,14 @@ export default function EditButton(props) {
                   onChange={handleChange}
                   className="register-input"
                 />
-                <div className="remember-me">
-                  <input type="checkbox" id="rememberMe" />
-                  <label htmlFor="rememberMe">Remember Me</label>
-                </div>
-                <ReCAPTCHA
-                  sitekey="6LdBVi8pAAAAAGTk834uzz-txgGjcKaCixBKyIMJ"
-                  onChange={onChange}
-                />
+
                 {err && <p className="register-error">{err}</p>}
                 <br />
                 <MDBBtn
                   outline
                   color="dark"
                   style={{ height: "36px", overflow: "visible" }}
-                  onClick={handleClick}
+                  onClick={handleClick && handleGoToProfile}
                   className="register-button"
                 >
                   Edit profile

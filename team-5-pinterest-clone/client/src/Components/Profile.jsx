@@ -8,9 +8,16 @@ import {
   MDBBtn,
 } from "mdb-react-ui-kit";
 import { DataContext } from "../Context.js";
+import { useNavigate } from "react-router-dom";
 
 export default function EditButton(props) {
   const { data } = useContext(DataContext);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    console.log("clicked");
+    navigate("/updateProfile");
+  };
 
   return (
     <div className="gradient-custom-2" style={{ backgroundColor: "" }}>
@@ -44,6 +51,7 @@ export default function EditButton(props) {
                     outline
                     color="dark"
                     style={{ height: "36px", overflow: "visible" }}
+                    onClick={handleClick}
                   >
                     Edit profile
                   </MDBBtn>

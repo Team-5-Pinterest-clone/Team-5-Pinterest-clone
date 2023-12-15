@@ -33,7 +33,7 @@ function App() {
         </div>
         <Routes>
           <Route index element={<Home />} />
-          <Route path="all-posts" element={<AllPosts />} />
+          <Route path="/all-posts" element={<AllPosts />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/createPost" element={<CreatePost />} />
