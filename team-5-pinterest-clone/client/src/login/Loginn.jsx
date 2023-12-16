@@ -18,14 +18,12 @@ const Loginn = () => {
 
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    // Clear previous error on input change
     setErr(null);
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      // Assuming login is a function that handles authentication
       await login(inputs);
 
       toast.success("Login successful!", {
@@ -37,7 +35,6 @@ const Loginn = () => {
         draggable: true,
       });
 
-      // Redirect to the "/all-posts" route upon successful login
       navigate("/all-posts");
     } catch (err) {
       setErr(err.response.data);
