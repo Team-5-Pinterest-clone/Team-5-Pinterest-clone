@@ -27,7 +27,7 @@ function App() {
       <AuthContextProvider>
         <DataProvider>
           <div>
-            <Nav />
+            <Nav setResults={setResults} />
             <div className="Search-container">
               <Search setResults={setResults} />
               <SearchResult results={results} />

@@ -1,8 +1,8 @@
 // when user loged in = User HomePage
 
-import {useState,useEffect } from "react";
-import axios from 'axios'
-import * as React from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -20,6 +20,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import CreateIcon from "@mui/icons-material/Create";
 import logo from "./photos/blackLogo.png";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -80,24 +81,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar({ setResults }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const navigate = useNavigate();
-  const [userPhoto, setUserPhoto] = useState([]);
-  const userLog = { idUsers: 1 }
-
-  useEffect(() => { 
-    axios
-      .get(`http://localhost:8800/api/users/getPhoto/${userLog.idUsers}`)
-      .then((result) => {
-        console.log(result.data);
-        setUserPhoto(result.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [userLog.idUsers]); // Ensure this useEffect runs when userLog changes
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -130,6 +117,19 @@ export default function PrimarySearchAppBar() {
     console.log("clicked");
     navigate("/profile");
   };
+  const handleLogout = () => {
+    axios
+      .post("http://localhost:8800/api/users/logout")
+      .then((response) => {
+        console.log(response.data);
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.error("Logout failed:", error);
+      });
+
+    handleMenuClose();
+  };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -152,7 +152,9 @@ export default function PrimarySearchAppBar() {
         Profile
       </StyledMenuItem>
 
-      <StyledMenuItem onClick={handleMenuClose}>log out</StyledMenuItem>
+      <StyledMenuItem onClick={handleMenuClose && handleLogout}>
+        log out
+      </StyledMenuItem>
     </Menu>
   );
 
@@ -215,7 +217,13 @@ export default function PrimarySearchAppBar() {
         sx={{ backgroundColor: "rgba(251, 251, 251, 1)" }}
       >
         <Toolbar>
-          <img src={logo} alt="bug" width={50} height={50} />
+          <img
+            src={logo}
+            alt="bug"
+            width={50}
+            height={50}
+            onClick={handleClick}
+          />
           <Typography
             variant="h6"
             noWrap
@@ -238,6 +246,8 @@ export default function PrimarySearchAppBar() {
             <StyledInputBase
               placeholder="type to search"
               inputProps={{ "aria-label": "search" }}
+              value={input}
+              onChange={(e) => handleChange(e.target.value)}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
@@ -262,13 +272,13 @@ export default function PrimarySearchAppBar() {
                 <CreateIcon />
               </Badge>
             </StyledIconButton>
-            {userPhoto.map((el,i)=>(
-           <Avatar
-           key={el.idUsers}
-           alt={el.username}
-           src={el.username}
-           onClick={handleProfileMenuOpen}
-         />
+            {userPhoto.map((el, i) => (
+              <Avatar
+                key={el.idUsers}
+                alt={el.username}
+                src={el.username}
+                onClick={handleProfileMenuOpen}
+              />
             ))}
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
