@@ -195,20 +195,6 @@ function CreatePost() {
                 required
               />
             </label>
-
-            <label className="form-label">
-              <p>Board</p>
-              <input
-                className="form-control"
-                id="formGroupExampleInput"
-                placeholder=" Choose a Board:"
-                name="Board"
-                type="text"
-                onChange={(e) => setBoard(e.target.value)}
-                required
-              />
-            </label>
-
             <label className="form-label">
               <p>Category</p>
               <input

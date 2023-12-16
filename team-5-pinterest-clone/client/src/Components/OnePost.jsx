@@ -7,6 +7,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 //import IconButton from "@material-ui/core/IconButton";
 import { MDBCardText } from "mdb-react-ui-kit";
+import { RWebShare } from "react-web-share";
 function OnePost(props) {
   const [comment, setComment] = useState([]);
   const [refresh, setRefresh] = useState(false);
@@ -128,9 +129,18 @@ function OnePost(props) {
             >
               <FavoriteIcon />
             </button>{" "}
-            <button type="button" className="btn p-3">
-              <ShareIcon />
-            </button>
+            <RWebShare
+              data={{
+                text: "Check out this post by " + props.user.username,
+                url: "your-post-url", // Replace with the actual URL of your post
+                title: "Post by " + props.user.username,
+              }}
+              onClick={() => console.log("shared successfully!")}
+            >
+              <button type="button" className="btn p-3">
+                <ShareIcon />
+              </button>
+            </RWebShare>
             <button
               type="button "
               className="btn-close"
