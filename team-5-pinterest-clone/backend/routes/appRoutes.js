@@ -17,7 +17,7 @@ router.get("/getUser/:id", appController.getUser);
 // Get one routes
 router.get("/getOneUserid/:id", appController.getOneUserById);
 router.get("/getOneUser/:username", appController.getOneUser);
-router.get("/getOnePost/:id", appController.getOnePost);
+router.get("/getAllPost/:id", appController.getAllPost);
 router.get("/getOneComment/:idposts", appController.getOneComment);
 router.get("/getByIdUsers/:id", appController.getOneSavedByIdUsers);
 router.get("/getByIdSaved/:id", appController.getOneSavedByIdSaved);
