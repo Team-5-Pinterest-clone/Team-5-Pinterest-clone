@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState,useEffect } from "react";
 import {
   MDBCol,
   MDBContainer,
@@ -9,16 +9,33 @@ import {
 } from "mdb-react-ui-kit";
 import { DataContext } from "../Context.js";
 import { useNavigate } from "react-router-dom";
-
+import axios from 'axios'
 export default function EditButton(props) {
   const { data } = useContext(DataContext);
   const navigate = useNavigate();
+  const userLoged = localStorage.getItem("user")
+  const [userLog,setUserlogged]=useState(userLoged ? JSON.parse(userLoged) : null)
+  const [usersPosts,setUP]=useState([])
+  console.log("clicked",userLog.username);
+  useEffect(() => { 
+    axios
+      .get(`http://localhost:8800/api/users/getAllPost/${userLog.idUsers}`)
+      .then((result) => {
+        console.log(result.data);
+        setUP(result.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
-  const handleClick = () => {
-    console.log("clicked");
+  const handleClickedit = () => {
     navigate("/updateProfile");
-    navigate("/createPost");
+  
   };
+  const handleCreatepin=()=>{
+    navigate("/createPost");
+  }
 
   return (
     <div className="gradient-custom-2" style={{ backgroundColor: "" }}>
@@ -35,7 +52,7 @@ export default function EditButton(props) {
                   style={{ width: "150px" }}
                 >
                   <MDBCardImage
-                    src="https://th.bing.com/th/id/OIP.BVbNgsb0pic_Ju-OKXrU3QAAAA?w=270&h=270&rs=1&pid=ImgDetMain"
+                    src={userLog && userLog.photo}
                     alt="Generic placeholder image"
                     className="mt-4 mb-2 img-thumbnail"
                     fluid
@@ -46,13 +63,13 @@ export default function EditButton(props) {
                     }}
                   />
                   <h5 className="media-heading user_name px-2">
-                    {/* {props.user.username} */}
+                  {userLog && userLog.username}
                   </h5>
                   <MDBBtn
                     outline
                     color="dark"
                     style={{ height: "36px", overflow: "visible" }}
-                    onClick={handleClick}
+                    onClick={handleClickedit}
                   >
                     Edit profile
                   </MDBBtn>
@@ -64,7 +81,7 @@ export default function EditButton(props) {
               >
                 <div className="d-flex  justify-content-center text-center ">
                   <div>
-                    <p className="mb-1 h5">253</p>
+                    <p className="mb-1 h5">{usersPosts.length}</p>
                     <p className="small text-muted mb-0">Photos</p>
                   </div>
                 </div>
@@ -73,7 +90,7 @@ export default function EditButton(props) {
                 <div className="mb-3">
                   <p className="lead fw-normal mb-1">About</p>
                   <div className="p-2" style={{ backgroundColor: "#f8f9fa" }}>
-                    <p className="font-italic mb-1">Web Developer</p>
+                    <p className="font-italic mb-1">{userLog && userLog.bio}</p>
                   </div>
                 </div>
                 <div className="d-flex justify-content-between align-items-center mb-2">
@@ -81,20 +98,21 @@ export default function EditButton(props) {
                     <button
                       type="button"
                       className="btn p-3"
-                      onClick={handleClick}
+                      onClick={handleCreatepin}
                     >
                       {" "}
                       Create Pin
                     </button>
                   </p>
                   <p className="mb-0">
-                    <button type="button" className="btn p-3">
+                    <button type="button" className="btn p-3"> 
+                    {/* onclick show all false show 2 posts true show l map */}
                       {" "}
                       Show all
                     </button>
                   </p>
                 </div>
-                <MDBRow>
+                {/* <MDBRow>
                   <MDBCol className="mb-2">
                     <MDBCardImage
                       src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
@@ -109,22 +127,18 @@ export default function EditButton(props) {
                       className="w-100 rounded-3"
                     />
                   </MDBCol>
-                </MDBRow>
+                </MDBRow> */}
                 <MDBRow className="mb-2">
-                  <MDBCol className="mb-2">
+                  {usersPosts.map((post,i)=>{
+                    return(<><MDBCol className="mb-2">
                     <MDBCardImage
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
+                      src={post.photo}
                       alt="image 1"
-                      className="w-100 rounded-3"
+                      className="w-100 rounded-3" //set l hight to a smaller value
                     />
-                  </MDBCol>
-                  <MDBCol className="mb-2">
-                    <MDBCardImage
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"
-                      alt="image 1"
-                      className="w-100 rounded-3"
-                    />
-                  </MDBCol>
+                  </MDBCol></>
+                  )
+                  })}
                 </MDBRow>
               </div>
             </MDBCard>

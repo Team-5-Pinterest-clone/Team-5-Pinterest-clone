@@ -24,11 +24,12 @@ CREATE TABLE IF NOT EXISTS `pinterestclone`.`users` (
   `idUsers` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `photo` VARCHAR(255) NOT NULL,
-  `bio` VARCHAR(255) NOT NULL,
+  `photo` LONGTEXT NULL DEFAULT NULL,
+  `bio` VARCHAR(255) NULL DEFAULT NULL,
   `password` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`idUsers`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -40,13 +41,14 @@ CREATE TABLE IF NOT EXISTS `pinterestclone`.`saved` (
   `idsaved` INT NOT NULL AUTO_INCREMENT,
   `users_idUsers` INT NOT NULL,
   PRIMARY KEY (`idsaved`),
-  INDEX `fk_saved_Users1_idx` (`Users_idUsers` ASC) VISIBLE,
+  INDEX `fk_saved_Users1_idx` (`users_idUsers` ASC) VISIBLE,
   CONSTRAINT `fk_saved_Users1`
-    FOREIGN KEY (`Users_idUsers`)
+    FOREIGN KEY (`users_idUsers`)
     REFERENCES `pinterestclone`.`users` (`idUsers`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 5
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -60,10 +62,11 @@ CREATE TABLE IF NOT EXISTS `pinterestclone`.`postes` (
   `description` VARCHAR(255) NOT NULL,
   `categories` VARCHAR(45) NOT NULL,
   `saved_idsaved` INT NOT NULL,
-  `photo` VARCHAR(255) NOT NULL,
+  `photo` LONGTEXT NOT NULL,
   `createdAt` DATETIME NOT NULL,
+  `title` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`idpostes`),
-  INDEX `fk_postes_Users_idx` (`Users_idUsers` ASC) VISIBLE,
+  INDEX `fk_postes_Users_idx` (`users_idUsers` ASC) VISIBLE,
   INDEX `fk_postes_saved1_idx` (`saved_idsaved` ASC) VISIBLE,
   CONSTRAINT `fk_postes_saved1`
     FOREIGN KEY (`saved_idsaved`)
@@ -71,11 +74,12 @@ CREATE TABLE IF NOT EXISTS `pinterestclone`.`postes` (
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_postes_Users`
-    FOREIGN KEY (`Users_idUsers`)
+    FOREIGN KEY (`users_idUsers`)
     REFERENCES `pinterestclone`.`users` (`idUsers`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 14
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -89,20 +93,22 @@ CREATE TABLE IF NOT EXISTS `pinterestclone`.`comment` (
   `users_idUsers` INT NOT NULL,
   `createdAt` DATETIME NOT NULL,
   `body` VARCHAR(255) NOT NULL,
+  `comment_like` INT NOT NULL,
   PRIMARY KEY (`idcomment`),
   INDEX `fk_comment_postes1_idx` (`postes_idpostes` ASC) VISIBLE,
-  INDEX `fk_comment_Users1_idx` (`Users_idUsers` ASC) VISIBLE,
+  INDEX `fk_comment_Users1_idx` (`users_idUsers` ASC) VISIBLE,
   CONSTRAINT `fk_comment_postes1`
     FOREIGN KEY (`postes_idpostes`)
     REFERENCES `pinterestclone`.`postes` (`idpostes`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_comment_Users1`
-    FOREIGN KEY (`Users_idUsers`)
+    FOREIGN KEY (`users_idUsers`)
     REFERENCES `pinterestclone`.`users` (`idUsers`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 28
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
