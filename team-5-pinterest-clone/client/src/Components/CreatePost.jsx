@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function CreatePost() {
   const [file, setFile] = useState(null);
@@ -10,6 +11,7 @@ function CreatePost() {
   const [link, setLink] = useState("");
   const [board, setBoard] = useState("");
   const [category, setCategory] = useState("");
+  const navigate = useNavigate();
 
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -58,6 +60,16 @@ function CreatePost() {
     }
   };
   console.log(title);
+
+  const handleClick = () => {
+    if (title && description && link && board && category && image) {
+      console.log("clicked");
+      navigate("/all-posts");
+    } else {
+      alert("Please fill in all required fields and upload an image.");
+    }
+  };
+
   return (
     <div className="d-flex flex-column justify-content-center align-items-center vh-100 card">
       <div className="d-flex flex-row justify-content-center align-self-center">
@@ -209,7 +221,11 @@ function CreatePost() {
                 required
               />
             </label>
-            <button type="submit" className="btn btn-danger ">
+            <button
+              type="submit"
+              className="btn btn-danger "
+              // onClick={handleClick}
+            >
               Publish
             </button>
           </form>
