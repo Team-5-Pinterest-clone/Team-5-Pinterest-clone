@@ -3,8 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../authContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../login/login.css";
-import "../login/login.css";
+// import "../login/login.css";
 
 const Loginn = () => {
   const [inputs, setInputs] = useState({

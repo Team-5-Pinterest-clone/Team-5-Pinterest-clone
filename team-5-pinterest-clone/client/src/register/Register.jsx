@@ -17,19 +17,23 @@ const Register = () => {
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-  console.log(inputs);
 
   const handleClick = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await axios.post(
-        "http://localhost:8800/api/users/register",
-        inputs
-      );
-      // navigate("/login");
-    } catch (err) {
-      setErr(err.response.data);
+    if (inputs.username && inputs.password && inputs.email) {
+      try {
+        const response = await axios.post(
+          "http://localhost:8800/api/users/register",
+          inputs
+        );
+        navigate("/login"); // Redirect to the login page after successful registration
+      } catch (err) {
+        setErr(err.response.data);
+      }
+    } else {
+      // Display an error message or handle incomplete information case
+      console.error("Please fill in all the required fields.");
     }
   };
 
@@ -37,7 +41,7 @@ const Register = () => {
 
   return (
     <div className="register-container mt-5">
-      <h1>Create an account !</h1>
+      <h1>Create an account!</h1>
       <label htmlFor="username-input">Your Username:</label>
       <input
         type="text"
@@ -71,7 +75,7 @@ const Register = () => {
         onChange={onChange}
       />
       {err && <p className="register-error">{err}</p>}
-      error message
+
       <button onClick={handleClick} className="register-button">
         Register
       </button>
