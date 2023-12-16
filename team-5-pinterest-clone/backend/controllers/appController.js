@@ -225,16 +225,16 @@ const updateCommentBody = (req, res) => {
 };
 const updateCommentLike = (req, res) => {
   const id = req.params.id;
-  const like = req.body.like; // Assuming req.body.like contains the updated value for 'like'
+  const like = req.body.like;
 
-  const sql = `UPDATE comment SET like = ${like} WHERE idcomment = ${id}`;
+  const sql = `UPDATE comment SET comment_like = ${like} WHERE idcomment = ${id}`;
   db.query(sql, (err, result) => {
     if (err) {
       console.error(err);
-      res.status(500).json({ error: 'Failed to update comment like' });
+      res.status(500).json({ error: "Failed to update comment like" });
     } else {
       console.log(result);
-      res.status(200).json({ message: 'Comment like updated successfully' });
+      res.status(200).json({ message: "Comment like updated successfully" });
     }
   });
 };

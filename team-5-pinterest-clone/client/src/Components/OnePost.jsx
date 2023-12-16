@@ -4,12 +4,9 @@ import ShareIcon from "@mui/icons-material/Share";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 //import IconButton from "@material-ui/core/IconButton";
 import { MDBCardText } from "mdb-react-ui-kit";
-import { RWebShare } from "react-web-share"; // Import the sharing component
-
 function OnePost(props) {
   const [comment, setComment] = useState([]);
   const [refresh, setRefresh] = useState(false);
@@ -132,17 +129,7 @@ function OnePost(props) {
               <FavoriteIcon />
             </button>{" "}
             <button type="button" className="btn p-3">
-              <RWebShare
-                data={{
-                  text: "Check out this post by " + props.user.username,
-                  url: "your-post-url",
-                  title: "Post by " + props.user.username,
-                }}
-                onClick={() => console.log("shared successfully!")}
-              >
-                {" "}
-                <ShareIcon />
-              </RWebShare>
+              <ShareIcon />
             </button>
             <button
               type="button "
@@ -192,11 +179,14 @@ function OnePost(props) {
                         {comment.body}
                         <p>
                           <small>
-                            {comment.like}{" "}
+                            {comment.comment_like}{" "}
                             <a
                               href="#"
                               onClick={() =>
-                                handleLike(comment.idcomment, comment.like)
+                                handleLike(
+                                  comment.idcomment,
+                                  comment.comment_like
+                                )
                               }
                             >
                               Like
