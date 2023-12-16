@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import React from "react";
+import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -20,7 +20,6 @@ import HomeIcon from "@mui/icons-material/Home";
 import CreateIcon from "@mui/icons-material/Create";
 import logo from "./photos/blackLogo.png";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -81,10 +80,27 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar({ setResults }) {
+export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const navigate = useNavigate();
+  const [userPhoto, setUserPhoto] = useState([]);
+  const userLoged = localStorage.getItem("user");
+  const [userLog, setUserlogged] = useState(
+    userLoged ? JSON.parse(userLoged) : null
+  );
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8800/api/users/getOneUserid/${userLog.idUsers}`)
+      .then((result) => {
+        console.log(result.data);
+        setUserPhoto(result.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [userLog.idUsers]); // Ensure this useEffect runs when userLog changes
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -200,11 +216,7 @@ export default function PrimarySearchAppBar({ setResults }) {
         <p>Create</p>
       </StyledMenuItem>
       <StyledMenuItem>
-        <Avatar
-          onClick={handleProfileMenuOpen}
-          alt="Remy Sharp"
-          href="https://pin.it/5LeSeoE"
-        />
+        <Avatar onClick={handleProfileMenuOpen} />
         <p>Profile</p>
       </StyledMenuItem>
     </Menu>
@@ -217,13 +229,7 @@ export default function PrimarySearchAppBar({ setResults }) {
         sx={{ backgroundColor: "rgba(251, 251, 251, 1)" }}
       >
         <Toolbar>
-          <img
-            src={logo}
-            alt="bug"
-            width={50}
-            height={50}
-            onClick={handleClick}
-          />
+          <img src={logo} alt="bug" width={50} height={50} />
           <Typography
             variant="h6"
             noWrap
@@ -246,8 +252,6 @@ export default function PrimarySearchAppBar({ setResults }) {
             <StyledInputBase
               placeholder="type to search"
               inputProps={{ "aria-label": "search" }}
-              value={input}
-              onChange={(e) => handleChange(e.target.value)}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
@@ -274,9 +278,8 @@ export default function PrimarySearchAppBar({ setResults }) {
             </StyledIconButton>
             {userPhoto.map((el, i) => (
               <Avatar
-                key={el.idUsers}
-                alt={el.username}
-                src={el.username}
+                key={i}
+                src={userLog.photo}
                 onClick={handleProfileMenuOpen}
               />
             ))}
