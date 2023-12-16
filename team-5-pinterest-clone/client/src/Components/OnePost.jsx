@@ -4,6 +4,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 //import IconButton from "@material-ui/core/IconButton";
 import { MDBCardText } from "mdb-react-ui-kit";
@@ -134,14 +135,13 @@ function OnePost(props) {
               <RWebShare
                 data={{
                   text: "Check out this post by " + props.user.username,
-                  url: "your-post-url", // Replace with the actual URL of your post
+                  url: "your-post-url",
                   title: "Post by " + props.user.username,
                 }}
                 onClick={() => console.log("shared successfully!")}
               >
-                <button type="button" className="btn p-3">
-                  <ShareIcon />
-                </button>
+                {" "}
+                <ShareIcon />
               </RWebShare>
             </button>
             <button
