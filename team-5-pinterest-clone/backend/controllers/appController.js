@@ -83,7 +83,7 @@ const getOneComment = (req, res) => {
 };
 
 const getOneSavedByIdUsers = (req, res) => {
-  const sql = `SELECT * FROM saved WHERE idUsers=${req.params.idUsers}`;
+  const sql = `SELECT * FROM saved WHERE users_idUsers=${req.params.id}`;
   db.query(sql, (err, result) => {
     res.send(result);
   });

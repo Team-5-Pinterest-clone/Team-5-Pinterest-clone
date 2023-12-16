@@ -1,5 +1,7 @@
 // when user loged in = User HomePage
 
+import {useState,useEffect } from "react";
+import axios from 'axios'
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -82,6 +84,20 @@ export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const navigate = useNavigate();
+  const [userPhoto, setUserPhoto] = useState([]);
+  const userLog = { idUsers: 1 }
+
+  useEffect(() => { 
+    axios
+      .get(`http://localhost:8800/api/users/getPhoto/${userLog.idUsers}`)
+      .then((result) => {
+        console.log(result.data);
+        setUserPhoto(result.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [userLog.idUsers]); // Ensure this useEffect runs when userLog changes
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -220,7 +236,7 @@ export default function PrimarySearchAppBar() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search user"
+              placeholder="type to search"
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
@@ -246,11 +262,14 @@ export default function PrimarySearchAppBar() {
                 <CreateIcon />
               </Badge>
             </StyledIconButton>
-            <Avatar
-              onClick={handleProfileMenuOpen}
-              alt="Remy Sharp"
-              href="https://pin.it/5LeSeoE"
-            />
+            {userPhoto.map((el,i)=>(
+           <Avatar
+           key={el.idUsers}
+           alt={el.username}
+           src={el.username}
+           onClick={handleProfileMenuOpen}
+         />
+            ))}
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <StyledIconButton
