@@ -479,7 +479,18 @@ const logout = (req, res) => {
     .status(200)
     .json("User has been loged out");
 };
-
+const updateUserProfile = (req, res) => {
+  const sql = `UPDATE users SET username = '${req.body.username}', email = '${req.body.email}',   password = '${req.body.password}' WHERE idUsers = ${req.params.id}`;
+  ;
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.json(result);
+      console.log(result);
+    }
+  });
+};
 module.exports = {
   getAllusers,
   login,
@@ -500,6 +511,7 @@ module.exports = {
   updateUserPhoto,
   updateUserBio,
   updateUserPassword,
+  updateUserProfile,    
   updatePostDescription,
   updatePostCategories,
   updatePostphoto,

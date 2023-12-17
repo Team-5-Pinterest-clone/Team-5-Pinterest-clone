@@ -24,6 +24,7 @@ router.get("/getByIdSaved/:id", appController.getOneSavedByIdSaved);
 router.get("/getComments/:id", appController.getComments);
 
 // Update routes
+router.put("/updateProfile/:id", appController.updateUserProfile);
 router.put("/updateUsername/:id", appController.updateUsername);
 router.put("/updateUserEmail/:id", appController.updateUserEmail);
 router.put("/updateUserBio/:id", appController.updateUserBio);

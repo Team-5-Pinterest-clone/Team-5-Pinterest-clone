@@ -62,7 +62,7 @@ export default function EditButton(props) {
                       borderRadius: "35px",
                     }}
                   />
-                  <h5 className="media-heading user_name px-2">
+                  <h5 className="media-heading user_name px-2 text-dark" >
                   {userLog && userLog.username}
                   </h5>
                   <MDBBtn
