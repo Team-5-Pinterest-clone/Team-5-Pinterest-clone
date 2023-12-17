@@ -11,7 +11,6 @@
 
 // import axios from "axios";
 // import { useNavigate } from "react-router-dom";
-// import ReCAPTCHA from "react-google-recaptcha";
 // import "../register/register.css";
 
 // export default function EditButton(props) {
@@ -175,13 +174,14 @@ import { DataContext } from "../Context.js";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import ReCAPTCHA from "react-google-recaptcha";
 import "../register/register.css";
 
 export default function EditButton(props) {
   const { data } = useContext(DataContext);
-  const userLoged = localStorage.getItem("user")
-  const [userLog,setUserlogged]=useState(userLoged ? JSON.parse(userLoged) : null)
+  const userLoged = localStorage.getItem("user");
+  const [userLog, setUserlogged] = useState(
+    userLoged ? JSON.parse(userLoged) : null
+  );
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
@@ -197,9 +197,12 @@ export default function EditButton(props) {
 
   const handleClick = (e) => {
     e.preventDefault();
-  
+
     axios
-      .put(`http://localhost:8800/api/users/updateProfile/${userLog.idUsers}`, inputs)
+      .put(
+        `http://localhost:8800/api/users/updateProfile/${userLog.idUsers}`,
+        inputs
+      )
       .then((response) => {
         console.log(response); // Log the response if needed
         // navigate("/login");
@@ -209,7 +212,7 @@ export default function EditButton(props) {
         setErr(err.response.data); // Assuming setErr is properly defined
       });
   };
-  
+
   const handleGoToProfile = () => {
     console.log("clicked");
     navigate("/profile");
@@ -317,7 +320,10 @@ export default function EditButton(props) {
                   outline
                   color="dark"
                   style={{ height: "36px", overflow: "visible" }}
-                  onClick={handleClick && handleGoToProfile}
+                  onClick={(e) => {
+                    handleClick(e);
+                    handleGoToProfile();
+                  }}
                   className="register-button"
                 >
                   Edit profile
