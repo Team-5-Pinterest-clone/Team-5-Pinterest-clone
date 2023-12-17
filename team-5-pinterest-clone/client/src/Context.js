@@ -1,12 +1,12 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import { createContext, useContext, useState, useEffect } from "react";
+import axios from "axios";
 
 const DataContext = createContext();
 
 const DataProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [oneP, setOnep] = useState({});
-const [users,setUsers]=useState([])
+  const [users, setUsers] = useState([]);
   useEffect(() => {
     axios
       .get("http://localhost:8800/api/users/getAllPosts")
@@ -20,7 +20,7 @@ const [users,setUsers]=useState([])
   }, []);
 
   return (
-    <DataContext.Provider value={{ data, oneP, setOnep }}>
+    <DataContext.Provider value={{ data, setData, oneP, setOnep }}>
       {children}
     </DataContext.Provider>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Users from "../data/usersDummy.js";
 import Post from "./Post.jsx";
 import OnePost from "./OnePost.jsx";
@@ -15,9 +15,9 @@ function AllPosts() {
     // Scroll to the top of the page
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
   return (
     <div>
-      {details && <OnePost one={oneP} set={setDetails} user={users} />}
       <div className="allposts">
         {data.map((el, i) => (
           <Post key={i} data={el} handle={handleDetails} />

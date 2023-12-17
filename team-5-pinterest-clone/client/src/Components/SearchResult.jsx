@@ -1,75 +1,89 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import OnePost from "./OnePost.jsx";
 import { DataContext } from "../Context.js";
 
-const SearchResult = ({ results }) => {
+const SearchResult = ({ results, category, categories }) => {
   const [users, setUsers] = useState({});
   const [details, setDetails] = useState(false);
-  const { data, oneP, setOnep } = useContext(DataContext);
+  const { data, setData, oneP, setOnep } = useContext(DataContext);
 
   const handleDetails = (obj, obj2) => {
-    setDetails(true); // Corrected the syntax here
+    console.log("handleDetails");
+
     setOnep(obj);
     setUsers(obj2);
   };
-  console.log("aa", handleDetails);
+
+  useEffect(() => {
+    setOnep(null);
+  }, []);
+
   return (
     <>
-      {details && <OnePost one={oneP} set={setDetails} user={users} />}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          flexWrap: "wrap",
-          gap: "10px",
-        }}
-      >
-        {results.map((result, index) => (
-          <div
-            style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}
-            key={index}
-          >
+      {oneP && <OnePost one={oneP} set={setDetails} user={[]} />}
+
+      {category && results.length == 0 && (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            flexWrap: "wrap",
+            //gap: "10px",
+          }}
+        >
+          {categories.map((result, index) => (
             <div
-              className="card"
-              style={{ width: "18rem", maxWidth: 400, cursor: "pointer" }}
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "2px",
+              }}
               key={index}
+              onClick={() => handleDetails(result, users)}
             >
               <div
-                className="card-body"
-                style={{ display: "flex", alignItems: "center" }}
-                onClick={
-                  result.categories && (() => handleDetails(result, users))
-                }
+                className="card"
+                style={{
+                  width: "10rem",
+                  maxWidth: 200,
+                  cursor: "pointer",
+                }}
+                key={index}
               >
-                <img
-                  src={result.photo}
-                  alt="hi"
-                  style={{
-                    width: "30px",
-                    height: "30px",
-                    objectFit: "cover",
-                    marginRight: "10px",
-                  }}
-                />
-                <span
-                  style={{ cursor: result.categories ? "pointer" : "auto" }}
+                <div
+                  className="card-body"
+                  style={{ display: "flex", alignItems: "center" }}
                 >
-                  {result.categories}
-                </span>
+                  <img
+                    src={result.photo}
+                    alt="hi"
+                    style={{
+                      width: "30px",
+                      height: "30px",
+                      objectFit: "cover",
+                      marginRight: "10px",
+                    }}
+                  />
+                  <span
+                    style={{ cursor: result.categories ? "pointer" : "auto" }}
+                  >
+                    {result.categories}
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
-      <div className="results-list" style={{ maxWidth: 500 }}>
+      <div className="results-list" style={{ maxWidth: 500, margin: "0 auto" }}>
         {results.map((result, index) => (
           <table
             className="table table-sm mb-0 "
             key={index}
             style={{ maxWidth: 400 }}
           >
-            <tbody>
+            <tbody style={{}}>
               <tr>
                 <th
                   scope="row"

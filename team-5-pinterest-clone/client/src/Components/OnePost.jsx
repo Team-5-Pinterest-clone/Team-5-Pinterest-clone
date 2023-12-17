@@ -63,14 +63,27 @@ function OnePost(props) {
   }, [userLog.idUsers]);
 
   //comment add not work quey fix pls
+  localStorage.setItem("yourAuthTokenKey", "actual_token_value");
+  const authToken = localStorage.getItem("yourAuthTokenKey");
+  console.log("Received Token:", authToken); // Add this line to log the token
+
+  console.log("AuthToken:", authToken);
   const handleCommentAdd = () => {
     if (commentText.trim() !== "") {
       axios
-        .post("http://localhost:8800/api/comments/addComment", {
-          body: commentText,
-          idpostes: props.one.idpostes,
-          users_idUsers: userLog.idUsers,
-        })
+        .post(
+          "http://localhost:8800/api/users/addComment",
+          {
+            body: commentText,
+            idpostes: props.one.idpostes,
+            users_idUsers: userLog.idUsers,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
+        )
         .then((res) => {
           setCommentText("");
           setRefresh(!refresh);
