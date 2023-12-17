@@ -6,7 +6,7 @@ First, run the development server:
 
 ```bash
 cd team-5-pinterest-clone\backend\
-cd team-5-pinterest-clone\\client\
+cd team-5-pinterest-clone\client\
 npm i 
 npm run start
 # or
