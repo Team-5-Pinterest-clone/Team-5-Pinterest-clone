@@ -59,7 +59,24 @@ function OnePost(props) {
       .catch((err) => {
         console.error(err);
       });
-  }, [userLog.idUsers]); // Ensure this useEffect runs when userLog changes
+  }, [userLog.idUsers]);
+
+  //comment add not work quey fix pls
+  const handleCommentAdd = () => {
+    if (commentText.trim() !== "") {
+      axios
+        .post("http://localhost:8800/api/comments/addComment", {
+          body: commentText,
+          idpostes: props.one.idpostes,
+          users_idUsers: userLog.idUsers,
+        })
+        .then((res) => {
+          setCommentText("");
+          setRefresh(!refresh);
+        })
+        .catch((err) => console.log(err));
+    }
+  };
 
   const handleLike = (id, likes) => {
     axios
@@ -293,7 +310,7 @@ function OnePost(props) {
                             style={{
                               paddingBottom: "10px",
                             }}
-                            //onClick={handleCommentAdd}
+                            onClick={handleCommentAdd}
                           >
                             <br />
                             <i className="bi bi-send"></i> <br />
