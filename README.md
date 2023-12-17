@@ -1,7 +1,7 @@
 # Team-5-Pinterest-clone
 
 ## Getting Started
-#Installation
+# Installation
 First, run the development server:
 
 ```bash
@@ -33,14 +33,14 @@ I welcome contributions to enhance and customize this Pinterest clone. If you wo
 7. 
 ## Configuration
 
-##Features
+## Features
 
-##Feature 
+## Feature 
 
-##Feature 
+## Feature 
 
-##Troubleshooting
+## roubleshooting
 
-##Common issues and how to troubleshoot them.
+## Common issues and how to troubleshoot them.
 
-##License
+## License
