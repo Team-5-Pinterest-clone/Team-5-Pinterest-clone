@@ -4,8 +4,8 @@ import { DataContext } from "../Context.js";
 
 const SearchResult = ({ results, category, categories }) => {
   const [users, setUsers] = useState({});
-  const [details, setDetails] = useState(false);
-  const { data, setData, oneP, setOnep } = useContext(DataContext);
+  
+  const { data, setData, oneP, setOnep,details,setDetails} = useContext(DataContext);
 
   const handleDetails = (obj, obj2) => {
     console.log("handleDetails");

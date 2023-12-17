@@ -23,7 +23,6 @@ function App() {
       <AuthContextProvider>
         <DataProvider>
           <Nav />
-
           <Routes>
             <Route index element={<Home />} />
             <Route path="/all-posts" element={<AllPosts />} />
@@ -33,6 +32,7 @@ function App() {
             <Route path="/OnePost" element={<OnePost />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/updateProfile" element={<UpdateProfile />} />
+            <Route path="/nav" element={<Nav />} />
           </Routes>
         </DataProvider>
       </AuthContextProvider>

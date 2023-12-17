@@ -7,6 +7,7 @@ const DataProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [oneP, setOnep] = useState({});
   const [users, setUsers] = useState([]);
+  const [details, setDetails] = useState(false);
   useEffect(() => {
     axios
       .get("http://localhost:8800/api/users/getAllPosts")
@@ -20,7 +21,7 @@ const DataProvider = ({ children }) => {
   }, []);
 
   return (
-    <DataContext.Provider value={{ data, setData, oneP, setOnep }}>
+    <DataContext.Provider value={{ data, setData, oneP, setOnep,details,setDetails }}>
       {children}
     </DataContext.Provider>
   );

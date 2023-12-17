@@ -286,7 +286,7 @@ export default function PrimarySearchAppBar() {
                 inputProps={{ "aria-label": "search" }}
                 onChange={(e) => handleChange(e.target.value)}
                 onFocus={(e) => setCategory(true)}
-                // onBlur={(e) => setCategory(false)}
+                 onBlur={(e) => setCategory(false)}
               />
             </Search>
             <Box sx={{ flexGrow: 1 }} />
