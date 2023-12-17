@@ -195,19 +195,21 @@ export default function EditButton(props) {
   };
   console.log(inputs);
 
-  const handleClick = async (e) => {
+  const handleClick = (e) => {
     e.preventDefault();
-
-    try {
-      const response = await axios.put(
-        `http://localhost:8800/api/users/updateProfile/${userLog.idUsers}`,
-        inputs
-      );
-      // navigate("/login");
-    } catch (err) {
-      setErr(err.response.data);
-    }
+  
+    axios
+      .put(`http://localhost:8800/api/users/updateProfile/${userLog.idUsers}`, inputs)
+      .then((response) => {
+        console.log(response); // Log the response if needed
+        // navigate("/login");
+      })
+      .catch((err) => {
+        console.error("Error updating profile:", err);
+        setErr(err.response.data); // Assuming setErr is properly defined
+      });
   };
+  
   const handleGoToProfile = () => {
     console.log("clicked");
     navigate("/profile");
