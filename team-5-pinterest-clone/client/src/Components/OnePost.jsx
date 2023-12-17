@@ -61,10 +61,6 @@ function OnePost(props) {
       });
   }, [userLog.idUsers]); // Ensure this useEffect runs when userLog changes
 
-  const handleGoToProfile = () => {
-    console.log("clicked");
-    navigate("/profile");
-  };
   const handleLike = (id, likes) => {
     axios
       .put(`http://localhost:8800/api/users/updateCommentLike/${id}`, {
@@ -75,31 +71,8 @@ function OnePost(props) {
   };
 
   const handleClick = () => {
-    console.log("clicked");
     navigate("/profile");
   };
-  // handleCommentAdd not work
-  // const handleCommentAdd = () => {
-  //   if (commentText.trim() === "") {
-  //     alert("Please enter a comment before submitting.");
-  //     return;
-  //   }
-
-  //   const commentData = {
-  //     postes_idpostes: props.one.idpostes,
-  //     body: commentText,
-  //   };
-
-  //   axios
-  //     .post("http://localhost:8800/api/users/addComment", commentData, {
-  //       withCredentials: true,
-  //     })
-  //     .then((res) => {
-  //       setRefresh(!refresh);
-  //       setCommentText("");
-  //     })
-  //     .catch((err) => console.error(err));
-  // };
   return (
     <div
       className="d-flex flex-column justify-content-center align-items-center vh-100 card "
@@ -270,7 +243,7 @@ function OnePost(props) {
                     className="figure-img img-fluid rounded"
                     width="30px"
                     alt=""
-                    onClick={handleGoToProfile}
+                    onClick={handleClick}
                   />
                 ))}
               </figure>

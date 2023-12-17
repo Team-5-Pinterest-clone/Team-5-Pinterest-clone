@@ -131,7 +131,6 @@ export default function PrimarySearchAppBar({ setResults }) {
     navigate("/createPost");
   };
   const handleGoToProfile = () => {
-    console.log("clicked");
     navigate("/profile");
   };
   const handleLogout = () => {
