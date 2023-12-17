@@ -9,7 +9,7 @@ const SearchResult = ({ results, category, categories }) => {
 
   const handleDetails = (obj, obj2) => {
     console.log("handleDetails");
-
+    setDetails(true)
     setOnep(obj);
     setUsers(obj2);
   };
@@ -20,7 +20,7 @@ const SearchResult = ({ results, category, categories }) => {
 
   return (
     <>
-      {oneP && <OnePost one={oneP} set={setDetails} user={[]} />}
+      {details && <OnePost one={oneP} set={setDetails} user={[]} />}
 
       {category && results.length == 0 && (
         <div
