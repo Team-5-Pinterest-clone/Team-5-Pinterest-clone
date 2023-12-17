@@ -7,6 +7,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MDBCardText } from "mdb-react-ui-kit";
 import { RWebShare } from "react-web-share";
+import Avatar from "@mui/material/Avatar";
 
 function OnePost(props) {
   const [comment, setComment] = useState([]);
@@ -119,13 +120,8 @@ function OnePost(props) {
             <div className="media d-flex">
               <a className="media-left" href="#!">
                 <span className="d-flex">
-                  <img
-                    src={props.user.photo}
-                    alt="User Avatar"
-                    className="img-circle"
-                    width="30px"
-                    height="30px"
-                  />
+                  <Avatar src={props.user.photo} />
+
                   <h5
                     className="media-heading user_name px-2"
                     onClick={handleClick}
@@ -254,12 +250,11 @@ function OnePost(props) {
             <div className="media d-flex">
               <figure className="figure px-2">
                 {userPhoto.map((el, i) => (
-                  <img
+                  <Avatar
                     key={i}
                     src={userLog.photo}
-                    className="figure-img img-fluid rounded"
-                    width="30px"
-                    alt=""
+                    alt="User Avatar"
+                    sx={{ width: 30, height: 30 }}
                     onClick={handleClick}
                   />
                 ))}
