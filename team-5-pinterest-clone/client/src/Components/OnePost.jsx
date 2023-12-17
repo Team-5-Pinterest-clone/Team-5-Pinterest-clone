@@ -62,33 +62,22 @@ function OnePost(props) {
       });
   }, [userLog.idUsers]);
 
-  //comment add not work quey fix pls
-  localStorage.setItem("yourAuthTokenKey", "actual_token_value");
-  const authToken = localStorage.getItem("yourAuthTokenKey");
-  console.log("Received Token:", authToken); // Add this line to log the token
-
-  console.log("AuthToken:", authToken);
   const handleCommentAdd = () => {
     if (commentText.trim() !== "") {
       axios
-        .post(
-          "http://localhost:8800/api/users/addComment",
-          {
-            body: commentText,
-            idpostes: props.one.idpostes,
-            users_idUsers: userLog.idUsers,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${authToken}`,
-            },
-          }
-        )
+        .post("http://localhost:8800/api/users/addComment", {
+          postes_idpostes: props.one.idpostes,
+          users_idUsers: userLog.idUsers,
+          createdAt: "2023-01-20T08:30:00.000Z",
+          body: commentText,
+          comment_like: 0,
+        })
         .then((res) => {
           setCommentText("");
           setRefresh(!refresh);
         })
         .catch((err) => console.log(err));
+      console.log("clicked");
     }
   };
 

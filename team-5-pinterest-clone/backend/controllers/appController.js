@@ -338,28 +338,26 @@ const getComments = (req, res) => {
 };
 
 const addComment = (req, res) => {
-  const token = req.cookies.accessToken;
-  if (!token) return res.status(401).json("Not logged in!");
+  // const token = req.cookies.accessToken;
+  // if (!token) return res.status(401).json("Not logged in!");
 
-  jwt.verify(token, "secretkey", (err, userInfo) => {
-    if (err) return res.status(403).json("Token is not valid!");
+  // jwt.verify(token, "secretkey", (err, userInfo) => {
+  //   if (err) return res.status(403).json("Token is not valid!");
 
-    const q =
-      "INSERT INTO comment(`postes_idpostes`, `users_idUsers`, `createdAt`, `body`) VALUES (?)";
-    const values = [
-      req.body.poestes_idpostes,
-      userInfo.users_idUsers,
-      moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-      req.body.body,
-    ];
+  const q =
+    "INSERT INTO comment(`postes_idpostes`, `users_idUsers`, `createdAt`, `body`) VALUES (?)";
+  const values = [
+    req.body.postes_idpostes,
+    req.body.users_idUsers,
+    moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+    req.body.body,
+  ];
 
-    db.query(q, [values], (err, data) => {
-      if (err) return res.status(500).json(err);
-      return res.status(200).json("Comment has been created.");
-    });
+  db.query(q, [values], (err, data) => {
+    if (err) return res.status(500).json(err);
+    return res.status(200).json("Comment has been created.");
   });
 };
-
 const deleteComment = (req, res) => {
   const token = req.cookies.access_token;
   if (!token) return res.status(401).json("Not authenticated!");
