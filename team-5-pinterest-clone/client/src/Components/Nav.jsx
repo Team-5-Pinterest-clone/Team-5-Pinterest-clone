@@ -80,7 +80,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar({ setResults }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const navigate = useNavigate();
@@ -89,6 +89,7 @@ export default function PrimarySearchAppBar() {
   const [userLog, setUserlogged] = useState(
     userLoged ? JSON.parse(userLoged) : null
   );
+  const [input, setInput] = useState("");
 
   useEffect(() => {
     axios
@@ -146,7 +147,10 @@ export default function PrimarySearchAppBar() {
 
     handleMenuClose();
   };
-
+  const handleChange = (value) => {
+    setInput(value);
+    fetchData(value);
+  };
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -221,7 +225,23 @@ export default function PrimarySearchAppBar() {
       </StyledMenuItem>
     </Menu>
   );
-
+  const fetchData = (value) => {
+    fetch("http://localhost:8800/api/users/getAllPosts")
+      .then((response) => response.json())
+      .then((json) => {
+        console.log("2", json);
+        const results = json.filter((post) => {
+          return (
+            value &&
+            post &&
+            post.categories &&
+            post.categories.toLowerCase().includes(value)
+          );
+        });
+        console.log("1", results);
+        setResults(results);
+      });
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -252,6 +272,7 @@ export default function PrimarySearchAppBar() {
             <StyledInputBase
               placeholder="type to search"
               inputProps={{ "aria-label": "search" }}
+              onChange={(e) => handleChange(e.target.value)}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />

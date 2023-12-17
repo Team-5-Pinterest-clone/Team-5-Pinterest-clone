@@ -3,7 +3,14 @@ import React from "react";
 const SearchResult = ({ results }) => {
   return (
     <>
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: "10px",
+        }}
+      >
         {results.map((result, index) => {
           return (
             <>

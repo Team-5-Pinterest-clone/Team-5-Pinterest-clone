@@ -10,7 +10,6 @@ import CreatePost from "./Components/CreatePost.jsx";
 import OnePost from "./Components/OnePost.jsx";
 import Profile from "./Components/Profile.jsx";
 import UpdateProfile from "./Components/UpdateProfile.jsx";
-import Search from "./Components/Search.jsx";
 import { DataProvider } from "./Context.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -29,7 +28,6 @@ function App() {
           <div>
             <Nav setResults={setResults} />
             <div className="Search-container">
-              <Search setResults={setResults} />
               <SearchResult results={results} />
             </div>
           </div>
@@ -42,7 +40,6 @@ function App() {
             <Route path="/OnePost" element={<OnePost />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/updateProfile" element={<UpdateProfile />} />
-            {/* <Route path="/search" element={<Search setResults={setResults} />} /> */}
           </Routes>
         </DataProvider>
       </AuthContextProvider>
