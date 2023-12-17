@@ -89,7 +89,16 @@ function OnePost(props) {
       .then((res) => setRefresh(!refresh))
       .catch((err) => console.log(err));
   };
-
+  const handleSaved=()=>{
+    axios
+    .post("http://localhost:8800/api/users/saved",{users_idUsers:userLog.idUsers,idposts:props.one.idpostes})
+    .then((result) => {
+      console.log(result.data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  }
   const handleClick = () => {
     navigate("/profile");
   };
@@ -139,6 +148,7 @@ function OnePost(props) {
               className="btn btn-danger p-3"
               data-bs-dismiss=""
               aria-label=""
+              onClick={()=>handleSaved()}
             >
               <FavoriteIcon />
             </button>{" "}

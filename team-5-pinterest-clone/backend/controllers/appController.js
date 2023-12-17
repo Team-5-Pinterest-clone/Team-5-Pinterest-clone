@@ -415,7 +415,12 @@ const updateUser = (req, res) => {
     );
   });
 };
-
+const createSaved = (req, res) => {
+  const sql = "insert into saved SET ? ";
+  db.query(sql, req.body, (err, result) => {
+    res.send(result);
+  });
+};
 const register = (req, res) => {
   const q = "SELECT * FROM users WHERE username = ? ";
   db.query(q, [req.body.username], (err, data) => {
@@ -500,6 +505,7 @@ module.exports = {
   updatePostphoto,
   updateCommentBody,
   updateCommentLike,
+  createSaved,
   deleteSaved,
   deletePost,
   createPost,

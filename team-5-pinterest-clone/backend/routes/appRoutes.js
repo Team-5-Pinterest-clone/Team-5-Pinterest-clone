@@ -45,7 +45,7 @@ router.delete("/deleteComment/:id", appController.deleteComment);
 router.post("/createUser", appController.createUser);
 router.post("/addPost", appController.addPost);
 router.post("/addComment", appController.addComment);
-
+router.post("/saved", appController.createSaved);
 // Search routes
 router.post(
   "/searchByCategories/:categories",
