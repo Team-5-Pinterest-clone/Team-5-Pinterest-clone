@@ -13,6 +13,13 @@ function OnePost(props) {
   const [refresh, setRefresh] = useState(false);
   const [commentText, setCommentText] = useState("");
   const navigate = useNavigate();
+  const userLoged = localStorage.getItem("user");
+  const [userPhoto, setUserPhoto] = useState([]);
+
+  const [userLog, setUserlogged] = useState(
+    userLoged ? JSON.parse(userLoged) : null
+  );
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   useEffect(() => {
     axios
@@ -42,7 +49,22 @@ function OnePost(props) {
         console.error(err);
       });
   }, [props.one.idpostes, refresh]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8800/api/users/getOneUserid/${userLog.idUsers}`)
+      .then((result) => {
+        console.log(result.data);
+        setUserPhoto(result.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [userLog.idUsers]); // Ensure this useEffect runs when userLog changes
 
+  const handleGoToProfile = () => {
+    console.log("clicked");
+    navigate("/profile");
+  };
   const handleLike = (id, likes) => {
     axios
       .put(`http://localhost:8800/api/users/updateCommentLike/${id}`, {
@@ -105,7 +127,7 @@ function OnePost(props) {
         >
           <div className="toast-header ">
             <div className="media d-flex">
-              <a className="media-left" href="#">
+              <a className="media-left" href="#!">
                 <span className="d-flex">
                   <img
                     src={props.user.photo}
@@ -192,7 +214,7 @@ function OnePost(props) {
                             >
                               <MDBCardText className="font-italic mb-1">
                                 <div className="media d-flex">
-                                  <a className="media-left" href="#">
+                                  <a className="media-left" href="#!">
                                     <span className="d-flex">
                                       <img
                                         src={comment.userInfo.photo}
@@ -241,12 +263,16 @@ function OnePost(props) {
           <div className="mb-3 card-body">
             <div className="media d-flex">
               <figure className="figure px-2">
-                <img
-                  src="https://th.bing.com/th/id/OIP.BVbNgsb0pic_Ju-OKXrU3QAAAA?w=270&h=270&rs=1&pid=ImgDetMain"
-                  className="figure-img img-fluid rounded"
-                  width="30px"
-                  alt=""
-                />
+                {userPhoto.map((el, i) => (
+                  <img
+                    key={i}
+                    src={userLog.photo}
+                    className="figure-img img-fluid rounded"
+                    width="30px"
+                    alt=""
+                    onClick={handleGoToProfile}
+                  />
+                ))}
               </figure>
 
               <label htmlFor="formGroupExampleInput" className="form-label">
