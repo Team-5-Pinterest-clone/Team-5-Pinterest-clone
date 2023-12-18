@@ -1,4 +1,4 @@
-import React, { useEffect,useContext, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import Box from "@mui/material/Box";
@@ -16,7 +16,7 @@ function OnePost(props) {
   const navigate = useNavigate();
   const userLoged = localStorage.getItem("user");
   const [userPhoto, setUserPhoto] = useState([]);
-  const { users  } = useContext(DataContext);
+  const { users } = useContext(DataContext);
   const [userLog, setUserlogged] = useState(
     userLoged ? JSON.parse(userLoged) : null
   );
@@ -89,20 +89,23 @@ function OnePost(props) {
       .then((res) => setRefresh(!refresh))
       .catch((err) => console.log(err));
   };
-  const handleSaved=()=>{
+  const handleSaved = () => {
     axios
-    .post("http://localhost:8800/api/users/saved",{users_idUsers:userLog.idUsers,idposts:props.one.idpostes})
-    .then((result) => {
-      console.log(result.data);
-      setShowSuccess(true);
-      setTimeout(() => {
-        setShowSuccess(false);
-      }, 3000);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-  }
+      .post("http://localhost:8800/api/users/saved", {
+        users_idUsers: userLog.idUsers,
+        idposts: props.one.idpostes,
+      })
+      .then((result) => {
+        console.log(result.data);
+        setShowSuccess(true);
+        setTimeout(() => {
+          setShowSuccess(false);
+        }, 3000);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
   const handleClick = () => {
     navigate("/profile");
   };
@@ -152,12 +155,14 @@ function OnePost(props) {
               className="btn btn-danger p-3"
               data-bs-dismiss=""
               aria-label=""
-              onClick={()=>handleSaved()}
-            > {showSuccess && (
-              <div className="alert alert-success" role="alert">
-                post saved successfully!
-              </div>
-            )}
+              onClick={() => handleSaved()}
+            >
+              {" "}
+              {showSuccess && (
+                <div className="alert alert-success" role="alert">
+                  post saved successfully!
+                </div>
+              )}
               <FavoriteIcon />
             </button>{" "}
             <RWebShare

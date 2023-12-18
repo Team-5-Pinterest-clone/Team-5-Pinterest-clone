@@ -5,13 +5,13 @@ import OnePost from "./OnePost.jsx";
 import { DataContext } from "../Context.js";
 
 function AllPosts() {
-  
-  const { data, oneP, setOnep,details,setDetails,setUsers  } = useContext(DataContext);
+  const { data, oneP, setOnep, details, setDetails, setUsers } =
+    useContext(DataContext);
   const handleDetails = (obj, obj2) => {
     setDetails((prevDetails) => true);
     setOnep(obj);
     setUsers(obj2);
-    
+
     // Scroll to the top of the page
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
