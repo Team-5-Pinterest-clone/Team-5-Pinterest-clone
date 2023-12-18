@@ -21,7 +21,7 @@ function OnePost(props) {
     userLoged ? JSON.parse(userLoged) : null
   );
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  const [showSuccess, setShowSuccess] = useState(false);
   useEffect(() => {
     axios
       .get(
@@ -94,6 +94,10 @@ function OnePost(props) {
     .post("http://localhost:8800/api/users/saved",{users_idUsers:userLog.idUsers,idposts:props.one.idpostes})
     .then((result) => {
       console.log(result.data);
+      setShowSuccess(true);
+      setTimeout(() => {
+        setShowSuccess(false);
+      }, 3000);
     })
     .catch((err) => {
       console.error(err);
@@ -149,7 +153,11 @@ function OnePost(props) {
               data-bs-dismiss=""
               aria-label=""
               onClick={()=>handleSaved()}
-            >
+            > {showSuccess && (
+              <div className="alert alert-success" role="alert">
+                post saved successfully!
+              </div>
+            )}
               <FavoriteIcon />
             </button>{" "}
             <RWebShare

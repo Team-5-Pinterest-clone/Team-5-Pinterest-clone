@@ -7,9 +7,10 @@ function Home() {
         navigate('/all-posts')
     }
   return (
+   
     <div className='homebg'><h2 className='hometitle'>Welcome to Name– Where Every Image Tells a Story!</h2>
     <p className='hometxt'>Unlock the beauty of visual storytelling with Name, your go-to destination for a captivating collection of images. Immerse yourself in a world where creativity knows no bounds, and each photograph is a window into the extraordinary.</p>
-    <button className='homebtn' onClick={handleHomeBTN}>See Posts</button></div>
+    <button className='homebtn' ><a href="http://localhost:3000/all-posts">See Posts</a></button></div>
   )
 }
 

@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 import logo from "./photos/blueLogo.png";
 import Box from "@mui/material/Box";
+import { useNavigate } from 'react-router-dom';
 const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   const backgroundColor =
     theme.palette.mode === "light"
@@ -34,6 +35,10 @@ function handleClick(event) {
 }
 
 export default function CustomizedNavbar() {
+  const navigate = useNavigate();
+   
+        
+    
   return (
     <AppBar
       position="static"
@@ -68,8 +73,8 @@ export default function CustomizedNavbar() {
         <div role="presentation" onClick={handleClick}>
           <Typography variant="body1">
             <Breadcrumbs aria-label="breadcrumb">
-              <StyledBreadcrumb component="a" href="#" label="Log in" />
-              <StyledBreadcrumb component="a" href="#" label="Sign up" />
+              <StyledBreadcrumb  label="Log in"  onClick={()=>navigate('/login')}/>
+              <StyledBreadcrumb  label="Sign up" onClick={()=>navigate('/register')}/>
             </Breadcrumbs>
           </Typography>
         </div>
