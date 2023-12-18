@@ -70,22 +70,16 @@
   text-decoration: none;
   cursor: pointer;
   background-color: #00d9ff;
-  /* Green color, modify to fit your palette */
   color: #fff;
-  /* White text color */
   border: 2px solid #00d9ff;
-  /* Border color matches background initially */
   border-radius: 25px;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 .homebtn:hover {
   background-color: #fff;
-  /* White on hover */
   color: #00d9ff;
-  /* Green text on hover */
   border-color: #fff;
-  /* White border on hover */
 }
 
 .homebg {
@@ -156,14 +150,11 @@
   width: 100%;
   height: 100%;
   opacity: 0;
-  /* Initially hidden */
   transition: opacity 0.3s ease;
-  /* Add a smooth transition effect */
 }
 
 .postCard:hover .userOverlay {
   opacity: 1;
-  /* Make the userOverlay visible on hover */
   background-color: #2323238b;
 }
 
@@ -184,38 +175,7 @@
 
 .userimg {
   width: 80px;
-  /* Adjust as needed */
   height: 80px;
-  /* Adjust as needed */
   border-radius: 50%;
   object-fit: cover;
 }
-
-
-/* input onepost inputcomment */
-/* .inputcomment {
-  width: 100%;
-  max-width: 220px;
-  height: 45px;
-  padding: 12px;
-  border-radius: 12px;
-  border: 1.5px solid lightgrey;
-  outline: none;
-  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-  box-shadow: 0px 0px 20px -18px;
-}
-
-.inputcomment:hover {
-  border: 2px solid lightgrey;
-  box-shadow: 0px 0px 20px -17px;
-}
-
-.inputcomment:active {
-  transform: scale(0.95);
-}
-
-.inputcomment:focus {
-  border: 2px solid grey;
-} */
-
-/* end input onepost inputcomment */

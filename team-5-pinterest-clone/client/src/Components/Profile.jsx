@@ -1,4 +1,4 @@
-import React, { useContext, useState,useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   MDBCol,
   MDBContainer,
@@ -9,15 +9,17 @@ import {
 } from "mdb-react-ui-kit";
 import { DataContext } from "../Context.js";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios'
+import axios from "axios";
 export default function EditButton(props) {
   const { data } = useContext(DataContext);
   const navigate = useNavigate();
-  const userLoged = localStorage.getItem("user")
-  const [userLog,setUserlogged]=useState(userLoged ? JSON.parse(userLoged) : null)
-  const [usersPosts,setUP]=useState([])
-  console.log("clicked",userLog.username);
-  useEffect(() => { 
+  const userLoged = localStorage.getItem("user");
+  const [userLog, setUserlogged] = useState(
+    userLoged ? JSON.parse(userLoged) : null
+  );
+  const [usersPosts, setUP] = useState([]);
+  console.log("clicked", userLog.username);
+  useEffect(() => {
     axios
       .get(`http://localhost:8800/api/users/getAllPost/${userLog.idUsers}`)
       .then((result) => {
@@ -31,11 +33,10 @@ export default function EditButton(props) {
 
   const handleClickedit = () => {
     navigate("/updateProfile");
-  
   };
-  const handleCreatepin=()=>{
+  const handleCreatepin = () => {
     navigate("/createPost");
-  }
+  };
 
   return (
     <div className="gradient-custom-2" style={{ backgroundColor: "" }}>
@@ -62,8 +63,8 @@ export default function EditButton(props) {
                       borderRadius: "35px",
                     }}
                   />
-                  <h5 className="media-heading user_name px-2 text-dark" >
-                  {userLog && userLog.username}
+                  <h5 className="media-heading user_name px-2 text-dark">
+                    {userLog && userLog.username}
                   </h5>
                   <MDBBtn
                     outline
@@ -105,39 +106,26 @@ export default function EditButton(props) {
                     </button>
                   </p>
                   <p className="mb-0">
-                    <button type="button" className="btn p-3"> 
-                    {/* onclick show all false show 2 posts true show l map */}
-                      {" "}
+                    <button type="button" className="btn p-3">
+                      {/* onclick show all false show 2 posts true show l map */}{" "}
                       Show all
                     </button>
                   </p>
                 </div>
-                {/* <MDBRow>
-                  <MDBCol className="mb-2">
-                    <MDBCardImage
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
-                      alt="image 1"
-                      className="w-100 rounded-3"
-                    />
-                  </MDBCol>
-                  <MDBCol className="mb-2">
-                    <MDBCardImage
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
-                      alt="image 1"
-                      className="w-100 rounded-3"
-                    />
-                  </MDBCol>
-                </MDBRow> */}
+
                 <MDBRow className="mb-2">
-                  {usersPosts.map((post,i)=>{
-                    return(<><MDBCol className="mb-2">
-                    <MDBCardImage
-                      src={post.photo}
-                      alt="image 1"
-                      className="w-100 rounded-3" //set l hight to a smaller value
-                    />
-                  </MDBCol></>
-                  )
+                  {usersPosts.map((post, i) => {
+                    return (
+                      <>
+                        <MDBCol className="mb-2">
+                          <MDBCardImage
+                            src={post.photo}
+                            alt="image 1"
+                            className="w-100 rounded-3"
+                          />
+                        </MDBCol>
+                      </>
+                    );
                   })}
                 </MDBRow>
               </div>

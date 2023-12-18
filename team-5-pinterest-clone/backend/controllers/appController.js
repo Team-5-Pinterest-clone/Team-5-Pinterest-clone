@@ -276,45 +276,20 @@ const searchByUsername = (req, res) => {
     res.send(result);
   });
 };
-///////////////rahma/////////////////
 
-///////////////guez//////////////////
-
-// const addPost = (req, res) => {
-//   const token = req.cookies.accessToken;
-//   if (!token) return res.status(401).json("Not logged in!");
-
-//   jwt.verify(token, "secretkey", (err, userInfo) => {
-//     if (err) return res.status(403).json("Token is not valid!");
-
-//     const q =
-//       "INSERT INTO postes(`users_idUsers`,`description`, `categories`, `photo`, `createdAt`) VALUES (?)";
-//     const values = [
-//       userInfo.idUsers,
-//       req.body.description,
-//       req.body.categories,
-//       req.body.photo,
-//       moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-//     ];
-
-//     db.query(q, [values], (err, data) => {
-//       if (err) return res.status(500).json(err);
-//       return res.status(200).json("Post has been created.");
-//     });
-//   });
-// };
-const addPost  = (req, res) => {
-  const sql = "INSERT INTO postes(`users_idUsers`,`description`, `categories`, `photo`, `createdAt`,`title`,`link`) VALUES (?)";
+const addPost = (req, res) => {
+  const sql =
+    "INSERT INTO postes(`users_idUsers`,`description`, `categories`, `photo`, `createdAt`,`title`,`link`) VALUES (?)";
   const values = [
-           req.body.users_idUsers,
-           req.body.description,
-           req.body.categories,
-           req.body.photo,
-           moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-           req.body.title,
-           req.body.link
-        ]
-  db.query(sql,[values], (err, result) => {
+    req.body.users_idUsers,
+    req.body.description,
+    req.body.categories,
+    req.body.photo,
+    moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+    req.body.title,
+    req.body.link,
+  ];
+  db.query(sql, [values], (err, result) => {
     if (err) {
       console.error(err);
       res.status(500).json({ error: "Failed to post" });
@@ -323,7 +298,7 @@ const addPost  = (req, res) => {
       res.status(200).json({ message: "posted" });
     }
   });
-}; 
+};
 
 const deletePost = (req, res) => {
   const token = req.cookies.accessToken;
@@ -359,12 +334,6 @@ const getComments = (req, res) => {
 };
 
 const addComment = (req, res) => {
-  // const token = req.cookies.accessToken;
-  // if (!token) return res.status(401).json("Not logged in!");
-
-  // jwt.verify(token, "secretkey", (err, userInfo) => {
-  //   if (err) return res.status(403).json("Token is not valid!");
-
   const q =
     "INSERT INTO comment(`postes_idpostes`, `users_idUsers`, `createdAt`, `body`) VALUES (?)";
   const values = [
@@ -448,10 +417,8 @@ const register = (req, res) => {
     if (err) return res.status(500).json(err);
     if (data.length) return res.status(409).json("User already Exists!");
 
-    // hashing the password
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(req.body.password, salt);
-    // adding a new user
     const q = "INSERT INTO  users (`username`,`email`,`password`) VALUES (?) ";
     const values = [req.body.username, req.body.email, hashedPassword];
     db.query(q, [values], (err, data) => {
@@ -473,15 +440,11 @@ const login = (req, res) => {
     );
     if (!checkPassword)
       return res.status(400).json("Wrong password or username!");
-    // creating a token for the user
     const token = jwt.sign({ idUsers: data[0].idUsers }, "secretkey");
 
-    // seperate the password to return the infos without password even if it's hashed
     const { password, ...others } = data[0];
-    // to send the infos and the cookie
     res
       .cookie("accessToken", token, {
-        // so a random user or script can't use our cookie
         httpOnly: true,
       })
       .status(200)
@@ -490,11 +453,9 @@ const login = (req, res) => {
 };
 
 const logout = (req, res) => {
-  // we are gonna clear the cookie that we named ("accessToken")
   res
     .clearCookie("accessToken", {
       secure: true,
-      // the PORTS of the backend and frontend are not the same port so the server gonna block the cookie request so with sameSite:none we will be able to clear the cookie
       sameSite: "none",
     })
     .status(200)
@@ -502,7 +463,6 @@ const logout = (req, res) => {
 };
 const updateUserProfile = (req, res) => {
   const sql = `UPDATE users SET username = '${req.body.username}', email = '${req.body.email}',   password = '${req.body.password}' WHERE idUsers = ${req.params.id}`;
-  ;
   db.query(sql, (err, result) => {
     if (err) {
       console.error(err);
@@ -532,7 +492,7 @@ module.exports = {
   updateUserPhoto,
   updateUserBio,
   updateUserPassword,
-  updateUserProfile,    
+  updateUserProfile,
   updatePostDescription,
   updatePostCategories,
   updatePostphoto,

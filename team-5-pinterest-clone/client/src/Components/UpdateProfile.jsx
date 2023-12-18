@@ -41,12 +41,12 @@ export default function EditButton(props) {
         inputs
       )
       .then((response) => {
-        console.log(response); // Log the response if needed
+        console.log(response);
         // navigate("/login");
       })
       .catch((err) => {
         console.error("Error updating profile:", err);
-        setErr(err.response.data); // Assuming setErr is properly defined
+        setErr(err.response.data);
       });
   };
 

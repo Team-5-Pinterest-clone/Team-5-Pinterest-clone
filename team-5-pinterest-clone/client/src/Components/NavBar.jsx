@@ -1,4 +1,3 @@
-// when user logs out = landingPage = for All visitors
 import React from "react";
 import { emphasize, styled } from "@mui/material/styles";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
@@ -8,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 import logo from "./photos/blueLogo.png";
 import Box from "@mui/material/Box";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   const backgroundColor =
     theme.palette.mode === "light"
@@ -36,9 +35,7 @@ function handleClick(event) {
 
 export default function CustomizedNavbar() {
   const navigate = useNavigate();
-   
-        
-    
+
   return (
     <AppBar
       position="static"
@@ -73,8 +70,14 @@ export default function CustomizedNavbar() {
         <div role="presentation" onClick={handleClick}>
           <Typography variant="body1">
             <Breadcrumbs aria-label="breadcrumb">
-              <StyledBreadcrumb  label="Log in"  onClick={()=>navigate('/login')}/>
-              <StyledBreadcrumb  label="Sign up" onClick={()=>navigate('/register')}/>
+              <StyledBreadcrumb
+                label="Log in"
+                onClick={() => navigate("/login")}
+              />
+              <StyledBreadcrumb
+                label="Sign up"
+                onClick={() => navigate("/register")}
+              />
             </Breadcrumbs>
           </Typography>
         </div>

@@ -1,5 +1,3 @@
-// when user loged in = User HomePage
-
 import { useState, useEffect } from "react";
 import axios from "axios";
 import * as React from "react";
@@ -107,7 +105,7 @@ export default function PrimarySearchAppBar() {
       .catch((err) => {
         console.error(err);
       });
-  }, [userLog.idUsers]); // Ensure this useEffect runs when userLog changes
+  }, [userLog.idUsers]);
 
   useEffect(() => {
     fetchData();
@@ -261,7 +259,13 @@ export default function PrimarySearchAppBar() {
           sx={{ backgroundColor: "rgba(251, 251, 251, 1)" }}
         >
           <Toolbar>
-            <img src={logo} alt="bug" width={50} height={50} onClick={handleClick} />
+            <img
+              src={logo}
+              alt="bug"
+              width={50}
+              height={50}
+              onClick={handleClick}
+            />
             <Typography
               variant="h6"
               noWrap
@@ -286,7 +290,7 @@ export default function PrimarySearchAppBar() {
                 inputProps={{ "aria-label": "search" }}
                 onChange={(e) => handleChange(e.target.value)}
                 onFocus={(e) => setCategory(true)}
-                 onBlur={(e) => setCategory(false)}
+                onBlur={(e) => setCategory(false)}
               />
             </Search>
             <Box sx={{ flexGrow: 1 }} />

@@ -27,12 +27,11 @@ const Register = () => {
           "http://localhost:8800/api/users/register",
           inputs
         );
-        navigate("/login"); // Redirect to the login page after successful registration
+        navigate("/login");
       } catch (err) {
         setErr(err.response.data);
       }
     } else {
-      // Display an error message or handle incomplete information case
       console.error("Please fill in all the required fields.");
     }
   };
