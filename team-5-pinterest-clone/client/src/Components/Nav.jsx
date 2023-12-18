@@ -261,7 +261,7 @@ export default function PrimarySearchAppBar() {
           sx={{ backgroundColor: "rgba(251, 251, 251, 1)" }}
         >
           <Toolbar>
-            <img src={logo} alt="bug" width={50} height={50} />
+            <img src={logo} alt="bug" width={50} height={50} onClick={handleClick} />
             <Typography
               variant="h6"
               noWrap
