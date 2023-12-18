@@ -11,6 +11,8 @@ function CreatePost() {
   const [link, setLink] = useState("");
   const [board, setBoard] = useState("");
   const [category, setCategory] = useState("");
+  const userLoged = localStorage.getItem("user")
+  const [userLog,setUserlogged]=useState(userLoged ? JSON.parse(userLoged) : null)
   const navigate = useNavigate();
 
   const handleImageChange = (e) => {
@@ -42,18 +44,19 @@ function CreatePost() {
       setUrl(result.data.secure_url);
 
       const otherFormData = {
-        title,
-        description,
-        link,
-        board,
-        category,
+        users_idUsers:userLog.idUsers,
+           description:description,
+           categories:category,
+           photo:image,
+           title:title,
+          link:link
       };
 
       const response = await axios.post(
         "http://localhost:8800/api/users/addPost",
         otherFormData
       );
-
+      navigate("/all-posts")
       console.log(response);
     } catch (error) {
       console.error(error);
@@ -210,7 +213,7 @@ function CreatePost() {
             <button
               type="submit"
               className="btn btn-danger "
-              // onClick={handleClick}
+               onClick={(e)=>handleSubmit(e)}
             >
               Publish
             </button>

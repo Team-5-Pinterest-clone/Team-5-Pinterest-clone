@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect,useContext, useState } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import Box from "@mui/material/Box";
@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { MDBCardText } from "mdb-react-ui-kit";
 import { RWebShare } from "react-web-share";
 import Avatar from "@mui/material/Avatar";
-
+import { DataContext } from "../Context.js";
 function OnePost(props) {
   const [comment, setComment] = useState([]);
   const [refresh, setRefresh] = useState(false);
@@ -16,12 +16,12 @@ function OnePost(props) {
   const navigate = useNavigate();
   const userLoged = localStorage.getItem("user");
   const [userPhoto, setUserPhoto] = useState([]);
-
+  const { users  } = useContext(DataContext);
   const [userLog, setUserlogged] = useState(
     userLoged ? JSON.parse(userLoged) : null
   );
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  const [showSuccess, setShowSuccess] = useState(false);
   useEffect(() => {
     axios
       .get(
@@ -62,20 +62,22 @@ function OnePost(props) {
       });
   }, [userLog.idUsers]);
 
-  //comment add not work quey fix pls
   const handleCommentAdd = () => {
     if (commentText.trim() !== "") {
       axios
-        .post("http://localhost:8800/api/comments/addComment", {
-          body: commentText,
-          idpostes: props.one.idpostes,
+        .post("http://localhost:8800/api/users/addComment", {
+          postes_idpostes: props.one.idpostes,
           users_idUsers: userLog.idUsers,
+          createdAt: "2023-01-20T08:30:00.000Z",
+          body: commentText,
+          comment_like: 0,
         })
         .then((res) => {
           setCommentText("");
           setRefresh(!refresh);
         })
         .catch((err) => console.log(err));
+      console.log("clicked");
     }
   };
 
@@ -87,7 +89,20 @@ function OnePost(props) {
       .then((res) => setRefresh(!refresh))
       .catch((err) => console.log(err));
   };
-
+  const handleSaved=()=>{
+    axios
+    .post("http://localhost:8800/api/users/saved",{users_idUsers:userLog.idUsers,idposts:props.one.idpostes})
+    .then((result) => {
+      console.log(result.data);
+      setShowSuccess(true);
+      setTimeout(() => {
+        setShowSuccess(false);
+      }, 3000);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  }
   const handleClick = () => {
     navigate("/profile");
   };
@@ -120,13 +135,13 @@ function OnePost(props) {
             <div className="media d-flex">
               <a className="media-left" href="#!">
                 <span className="d-flex">
-                  <Avatar src={props.user.photo} />
+                  <Avatar src={users.photo} />
 
                   <h5
                     className="media-heading user_name px-2"
                     onClick={handleClick}
                   >
-                    {props.user.username}
+                    {users.username}
                   </h5>
                 </span>
               </a>
@@ -137,7 +152,12 @@ function OnePost(props) {
               className="btn btn-danger p-3"
               data-bs-dismiss=""
               aria-label=""
-            >
+              onClick={()=>handleSaved()}
+            > {showSuccess && (
+              <div className="alert alert-success" role="alert">
+                post saved successfully!
+              </div>
+            )}
               <FavoriteIcon />
             </button>{" "}
             <RWebShare

@@ -11,11 +11,14 @@ import { DataContext } from "../Context.js";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import ReCAPTCHA from "react-google-recaptcha";
 import "../register/register.css";
 
 export default function EditButton(props) {
   const { data } = useContext(DataContext);
+  const userLoged = localStorage.getItem("user");
+  const [userLog, setUserlogged] = useState(
+    userLoged ? JSON.parse(userLoged) : null
+  );
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
@@ -29,19 +32,24 @@ export default function EditButton(props) {
   };
   console.log(inputs);
 
-  const handleClick = async (e) => {
+  const handleClick = (e) => {
     e.preventDefault();
 
-    try {
-      const response = await axios.post(
-        "http://localhost:8800/api/users/register",
+    axios
+      .put(
+        `http://localhost:8800/api/users/updateProfile/${userLog.idUsers}`,
         inputs
-      );
-      // navigate("/login");
-    } catch (err) {
-      setErr(err.response.data);
-    }
+      )
+      .then((response) => {
+        console.log(response); // Log the response if needed
+        // navigate("/login");
+      })
+      .catch((err) => {
+        console.error("Error updating profile:", err);
+        setErr(err.response.data); // Assuming setErr is properly defined
+      });
   };
+
   const handleGoToProfile = () => {
     console.log("clicked");
     navigate("/profile");
@@ -73,7 +81,7 @@ export default function EditButton(props) {
                       // onClick={handleImageClick}
                     >
                       <img
-                        src="https://th.bing.com/th/id/OIP.BVbNgsb0pic_Ju-OKXrU3QAAAA?w=270&h=270&rs=1&pid=ImgDetMain"
+                        src={userLog.photo}
                         alt="Generic placeholder "
                         className="mt-4 mb-2 img-thumbnail"
                         style={{
@@ -102,14 +110,14 @@ export default function EditButton(props) {
               >
                 <div className="d-flex  justify-content-center text-center ">
                   <div>
-                    <p className="small text-muted mb-0">title</p>
+                    <p className="small text-muted mb-0">{userLog.username}</p>
                     <div className="mb-3">
                       <p className="lead fw-normal mb-1">About</p>
                       <div
                         className="p-2"
                         style={{ backgroundColor: "#f8f9fa" }}
                       >
-                        <p className="font-italic mb-1">Web Developer</p>
+                        <p className="font-italic mb-1">{userLog.bio}</p>
                       </div>
                     </div>
                   </div>
@@ -149,7 +157,10 @@ export default function EditButton(props) {
                   outline
                   color="dark"
                   style={{ height: "36px", overflow: "visible" }}
-                  onClick={handleClick && handleGoToProfile}
+                  onClick={(e) => {
+                    handleClick(e);
+                    handleGoToProfile();
+                  }}
                   className="register-button"
                 >
                   Edit profile

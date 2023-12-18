@@ -24,6 +24,7 @@ router.get("/getByIdSaved/:id", appController.getOneSavedByIdSaved);
 router.get("/getComments/:id", appController.getComments);
 
 // Update routes
+router.put("/updateProfile/:id", appController.updateUserProfile);
 router.put("/updateUsername/:id", appController.updateUsername);
 router.put("/updateUserEmail/:id", appController.updateUserEmail);
 router.put("/updateUserBio/:id", appController.updateUserBio);
@@ -45,7 +46,7 @@ router.delete("/deleteComment/:id", appController.deleteComment);
 router.post("/createUser", appController.createUser);
 router.post("/addPost", appController.addPost);
 router.post("/addComment", appController.addComment);
-
+router.post("/saved", appController.createSaved);
 // Search routes
 router.post(
   "/searchByCategories/:categories",

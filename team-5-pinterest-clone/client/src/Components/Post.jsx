@@ -23,9 +23,14 @@ function Post(props) {
         <Link
       component="button"
       variant="body2"
-
+      style={{ position: 'absolute', bottom: 0, left: 0, margin: '8px' ,backgroundColor: 'white',
+      padding: '8px',
+      borderRadius: '50px',overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+      maxWidth: '50%',  }}
     >
-      {users.link}
+      <a href={props.data.link}>view link</a>
     </Link>
       </div>
     </div>

@@ -20,6 +20,8 @@ import HomeIcon from "@mui/icons-material/Home";
 import CreateIcon from "@mui/icons-material/Create";
 import logo from "./photos/blackLogo.png";
 import { useNavigate } from "react-router-dom";
+import { stepClasses } from "@mui/material";
+import SearchResult from "./SearchResult";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -80,7 +82,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar({ setResults }) {
+export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const navigate = useNavigate();
@@ -90,6 +92,10 @@ export default function PrimarySearchAppBar({ setResults }) {
     userLoged ? JSON.parse(userLoged) : null
   );
   const [input, setInput] = useState("");
+  const [results, setResults] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  const [category, setCategory] = useState(false);
 
   useEffect(() => {
     axios
@@ -102,6 +108,10 @@ export default function PrimarySearchAppBar({ setResults }) {
         console.error(err);
       });
   }, [userLog.idUsers]); // Ensure this useEffect runs when userLog changes
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -224,102 +234,115 @@ export default function PrimarySearchAppBar({ setResults }) {
       </StyledMenuItem>
     </Menu>
   );
-  const fetchData = (value) => {
+
+  const fetchData = (value = null) => {
     fetch("http://localhost:8800/api/users/getAllPosts")
       .then((response) => response.json())
       .then((json) => {
-        console.log("2", json);
         const results = json.filter((post) => {
-          return (
-            value &&
-            post &&
-            post.categories &&
-            post.categories.toLowerCase().includes(value)
-          );
+          return post && post.categories;
         });
-        console.log("1", results);
-        setResults(results);
+
+        setCategories(results);
+        if (value)
+          setResults(
+            results.filter((post) => {
+              return post.categories.toLowerCase().includes(value);
+            })
+          );
+        else setResults([]);
       });
   };
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar
-        position="static"
-        sx={{ backgroundColor: "rgba(251, 251, 251, 1)" }}
-      >
-        <Toolbar>
-          <img src={logo} alt="bug" width={50} height={50} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{
-              display: { xs: "none", sm: "block" },
-              color: "black",
-              marginLeft: "10px",
-              cursor: "pointer",
-            }}
-            onClick={handleClick}
-          >
-            PinTastic
-          </Typography>
-          <Box sx={{ flexGrow: 1 }} />
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="type to search"
-              inputProps={{ "aria-label": "search" }}
-              onChange={(e) => handleChange(e.target.value)}
-            />
-          </Search>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <StyledIconButton
-              size="large"
-              aria-label="show all posts"
-              color="inherit"
+    <div>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar
+          position="static"
+          sx={{ backgroundColor: "rgba(251, 251, 251, 1)" }}
+        >
+          <Toolbar>
+            <img src={logo} alt="bug" width={50} height={50} onClick={handleClick} />
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{
+                display: { xs: "none", sm: "block" },
+                color: "black",
+                marginLeft: "10px",
+                cursor: "pointer",
+              }}
               onClick={handleClick}
             >
-              <Badge color="error">
-                <HomeIcon />
-              </Badge>
-            </StyledIconButton>
-            <StyledIconButton
-              size="large"
-              aria-label="Create post"
-              color="inherit"
-              onClick={handleRahma}
-            >
-              <Badge color="error">
-                <CreateIcon />
-              </Badge>
-            </StyledIconButton>
-            {userPhoto.map((el, i) => (
-              <Avatar
-                key={i}
-                src={userLog.photo}
-                onClick={handleProfileMenuOpen}
+              PinTastic
+            </Typography>
+            <Box sx={{ flexGrow: 1 }} />
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="type to search"
+                inputProps={{ "aria-label": "search" }}
+                onChange={(e) => handleChange(e.target.value)}
+                onFocus={(e) => setCategory(true)}
+                 onBlur={(e) => setCategory(false)}
               />
-            ))}
-          </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <StyledIconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </StyledIconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
-    </Box>
+            </Search>
+            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ display: { xs: "none", md: "flex" } }}>
+              <StyledIconButton
+                size="large"
+                aria-label="show all posts"
+                color="inherit"
+                onClick={handleClick}
+              >
+                <Badge color="error">
+                  <HomeIcon />
+                </Badge>
+              </StyledIconButton>
+              <StyledIconButton
+                size="large"
+                aria-label="Create post"
+                color="inherit"
+                onClick={handleRahma}
+              >
+                <Badge color="error">
+                  <CreateIcon />
+                </Badge>
+              </StyledIconButton>
+              {userPhoto.map((el, i) => (
+                <Avatar
+                  key={i}
+                  src={userLog.photo}
+                  onClick={handleProfileMenuOpen}
+                />
+              ))}
+            </Box>
+            <Box sx={{ display: { xs: "flex", md: "none" } }}>
+              <StyledIconButton
+                size="large"
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
+              >
+                <MoreIcon />
+              </StyledIconButton>
+            </Box>
+          </Toolbar>
+        </AppBar>
+        {renderMobileMenu}
+        {renderMenu}
+      </Box>
+      <div className="Search-container">
+        <SearchResult
+          results={results}
+          categories={categories}
+          category={category}
+        />
+      </div>
+    </div>
   );
 }

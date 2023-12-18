@@ -103,7 +103,7 @@ const Loginn = () => {
         {err && <div className="text-danger">{err}</div>}
 
         <button type="submit" className="btn btn-danger btn-block mb-4">
-          Sign in
+        <a href="http://localhost:3000/all-posts">Sign in</a>
         </button>
 
         <div className="text-center">

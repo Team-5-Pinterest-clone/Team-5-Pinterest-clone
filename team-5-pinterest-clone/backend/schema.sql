@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `pinterestclone`.`users` (
   `password` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`idUsers`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 6
+AUTO_INCREMENT = 8
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -40,6 +40,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 CREATE TABLE IF NOT EXISTS `pinterestclone`.`saved` (
   `idsaved` INT NOT NULL AUTO_INCREMENT,
   `users_idUsers` INT NOT NULL,
+  `idposts` INT NULL DEFAULT NULL,
   PRIMARY KEY (`idsaved`),
   INDEX `fk_saved_Users1_idx` (`users_idUsers` ASC) VISIBLE,
   CONSTRAINT `fk_saved_Users1`
@@ -48,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `pinterestclone`.`saved` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 5
+AUTO_INCREMENT = 18
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -61,10 +62,11 @@ CREATE TABLE IF NOT EXISTS `pinterestclone`.`postes` (
   `users_idUsers` INT NOT NULL,
   `description` VARCHAR(255) NOT NULL,
   `categories` VARCHAR(45) NOT NULL,
-  `saved_idsaved` INT NOT NULL,
+  `saved_idsaved` INT NULL DEFAULT NULL,
   `photo` LONGTEXT NOT NULL,
   `createdAt` DATETIME NOT NULL,
   `title` VARCHAR(255) NULL DEFAULT NULL,
+  `link` LONGTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`idpostes`),
   INDEX `fk_postes_Users_idx` (`users_idUsers` ASC) VISIBLE,
   INDEX `fk_postes_saved1_idx` (`saved_idsaved` ASC) VISIBLE,
@@ -79,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `pinterestclone`.`postes` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 14
+AUTO_INCREMENT = 26
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -93,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `pinterestclone`.`comment` (
   `users_idUsers` INT NOT NULL,
   `createdAt` DATETIME NOT NULL,
   `body` VARCHAR(255) NOT NULL,
-  `comment_like` INT NOT NULL,
+  `comment_like` INT NULL DEFAULT NULL,
   PRIMARY KEY (`idcomment`),
   INDEX `fk_comment_postes1_idx` (`postes_idpostes` ASC) VISIBLE,
   INDEX `fk_comment_Users1_idx` (`users_idUsers` ASC) VISIBLE,
@@ -108,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `pinterestclone`.`comment` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 28
+AUTO_INCREMENT = 29
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -116,3 +118,4 @@ COLLATE = utf8mb4_0900_ai_ci;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+

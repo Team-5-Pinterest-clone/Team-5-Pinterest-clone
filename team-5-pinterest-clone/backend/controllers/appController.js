@@ -280,29 +280,50 @@ const searchByUsername = (req, res) => {
 
 ///////////////guez//////////////////
 
-const addPost = (req, res) => {
-  const token = req.cookies.accessToken;
-  if (!token) return res.status(401).json("Not logged in!");
+// const addPost = (req, res) => {
+//   const token = req.cookies.accessToken;
+//   if (!token) return res.status(401).json("Not logged in!");
 
-  jwt.verify(token, "secretkey", (err, userInfo) => {
-    if (err) return res.status(403).json("Token is not valid!");
+//   jwt.verify(token, "secretkey", (err, userInfo) => {
+//     if (err) return res.status(403).json("Token is not valid!");
 
-    const q =
-      "INSERT INTO postes(`users_idUsers`,`description`, `categories`, `photo`, `createdAt`) VALUES (?)";
-    const values = [
-      userInfo.idUsers,
-      req.body.description,
-      req.body.categories,
-      req.body.photo,
-      moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-    ];
+//     const q =
+//       "INSERT INTO postes(`users_idUsers`,`description`, `categories`, `photo`, `createdAt`) VALUES (?)";
+//     const values = [
+//       userInfo.idUsers,
+//       req.body.description,
+//       req.body.categories,
+//       req.body.photo,
+//       moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+//     ];
 
-    db.query(q, [values], (err, data) => {
-      if (err) return res.status(500).json(err);
-      return res.status(200).json("Post has been created.");
-    });
+//     db.query(q, [values], (err, data) => {
+//       if (err) return res.status(500).json(err);
+//       return res.status(200).json("Post has been created.");
+//     });
+//   });
+// };
+const addPost  = (req, res) => {
+  const sql = "INSERT INTO postes(`users_idUsers`,`description`, `categories`, `photo`, `createdAt`,`title`,`link`) VALUES (?)";
+  const values = [
+           req.body.users_idUsers,
+           req.body.description,
+           req.body.categories,
+           req.body.photo,
+           moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+           req.body.title,
+           req.body.link
+        ]
+  db.query(sql,[values], (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: "Failed to post" });
+    } else {
+      console.log(result);
+      res.status(200).json({ message: "posted" });
+    }
   });
-};
+}; 
 
 const deletePost = (req, res) => {
   const token = req.cookies.accessToken;
@@ -338,28 +359,26 @@ const getComments = (req, res) => {
 };
 
 const addComment = (req, res) => {
-  const token = req.cookies.accessToken;
-  if (!token) return res.status(401).json("Not logged in!");
+  // const token = req.cookies.accessToken;
+  // if (!token) return res.status(401).json("Not logged in!");
 
-  jwt.verify(token, "secretkey", (err, userInfo) => {
-    if (err) return res.status(403).json("Token is not valid!");
+  // jwt.verify(token, "secretkey", (err, userInfo) => {
+  //   if (err) return res.status(403).json("Token is not valid!");
 
-    const q =
-      "INSERT INTO comment(`postes_idpostes`, `users_idUsers`, `createdAt`, `body`) VALUES (?)";
-    const values = [
-      req.body.poestes_idpostes,
-      userInfo.users_idUsers,
-      moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-      req.body.body,
-    ];
+  const q =
+    "INSERT INTO comment(`postes_idpostes`, `users_idUsers`, `createdAt`, `body`) VALUES (?)";
+  const values = [
+    req.body.postes_idpostes,
+    req.body.users_idUsers,
+    moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+    req.body.body,
+  ];
 
-    db.query(q, [values], (err, data) => {
-      if (err) return res.status(500).json(err);
-      return res.status(200).json("Comment has been created.");
-    });
+  db.query(q, [values], (err, data) => {
+    if (err) return res.status(500).json(err);
+    return res.status(200).json("Comment has been created.");
   });
 };
-
 const deleteComment = (req, res) => {
   const token = req.cookies.access_token;
   if (!token) return res.status(401).json("Not authenticated!");
@@ -417,7 +436,12 @@ const updateUser = (req, res) => {
     );
   });
 };
-
+const createSaved = (req, res) => {
+  const sql = "insert into saved SET ? ";
+  db.query(sql, req.body, (err, result) => {
+    res.send(result);
+  });
+};
 const register = (req, res) => {
   const q = "SELECT * FROM users WHERE username = ? ";
   db.query(q, [req.body.username], (err, data) => {
@@ -476,7 +500,18 @@ const logout = (req, res) => {
     .status(200)
     .json("User has been loged out");
 };
-
+const updateUserProfile = (req, res) => {
+  const sql = `UPDATE users SET username = '${req.body.username}', email = '${req.body.email}',   password = '${req.body.password}' WHERE idUsers = ${req.params.id}`;
+  ;
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.json(result);
+      console.log(result);
+    }
+  });
+};
 module.exports = {
   getAllusers,
   login,
@@ -497,11 +532,13 @@ module.exports = {
   updateUserPhoto,
   updateUserBio,
   updateUserPassword,
+  updateUserProfile,    
   updatePostDescription,
   updatePostCategories,
   updatePostphoto,
   updateCommentBody,
   updateCommentLike,
+  createSaved,
   deleteSaved,
   deletePost,
   createPost,
