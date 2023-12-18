@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect,useContext, useState } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import Box from "@mui/material/Box";
@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { MDBCardText } from "mdb-react-ui-kit";
 import { RWebShare } from "react-web-share";
 import Avatar from "@mui/material/Avatar";
-
+import { DataContext } from "../Context.js";
 function OnePost(props) {
   const [comment, setComment] = useState([]);
   const [refresh, setRefresh] = useState(false);
@@ -16,7 +16,7 @@ function OnePost(props) {
   const navigate = useNavigate();
   const userLoged = localStorage.getItem("user");
   const [userPhoto, setUserPhoto] = useState([]);
-
+  const { users  } = useContext(DataContext);
   const [userLog, setUserlogged] = useState(
     userLoged ? JSON.parse(userLoged) : null
   );
@@ -131,13 +131,13 @@ function OnePost(props) {
             <div className="media d-flex">
               <a className="media-left" href="#!">
                 <span className="d-flex">
-                  <Avatar src={props.user.photo} />
+                  <Avatar src={users.photo} />
 
                   <h5
                     className="media-heading user_name px-2"
                     onClick={handleClick}
                   >
-                    {props.user.username}
+                    {users.username}
                   </h5>
                 </span>
               </a>

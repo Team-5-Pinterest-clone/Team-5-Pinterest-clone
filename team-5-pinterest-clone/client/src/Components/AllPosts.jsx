@@ -5,9 +5,8 @@ import OnePost from "./OnePost.jsx";
 import { DataContext } from "../Context.js";
 
 function AllPosts() {
-  const [users, setUsers] = useState({});
   
-  const { data, oneP, setOnep,details,setDetails  } = useContext(DataContext);
+  const { data, oneP, setOnep,details,setDetails,setUsers  } = useContext(DataContext);
   const handleDetails = (obj, obj2) => {
     setDetails((prevDetails) => true);
     setOnep(obj);

@@ -317,7 +317,7 @@ export default function EditButton(props) {
                   outline
                   color="dark"
                   style={{ height: "36px", overflow: "visible" }}
-                  onClick={handleClick && handleGoToProfile}
+                  onClick={()=>{handleClick();handleGoToProfile()}}
                   className="register-button"
                 >
                   Edit profile
